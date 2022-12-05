@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sophos Mobile App</string>
+    <string name="logo_description">Sophos Logo</string>
+    <string name="signin_message">Ingresa tus datos para acceder</string>
+    <string name="input_password">Contraseña</string>
+    <string name="input_email">Correo electrónico</string>
+    <string name="button_signin">Ingresar</string>
+    <string name="button_fingerprint">Ingresar con huella</string>
+    <string name="welcome_sophos">Bienvenida Sophos</string>
+    <string name="send_documents">Enviar documentos</string>
+    <string name="button_main">Ingresar</string>
+    <string name="view_documents">Ver documentos</string>
+    <string name="offices">Oficinas</string>
+    <string name="menu_theme_mode">Tema día/noche</string>
+    <string name="menu_language">Lenguaje</string>
+    <string name="menu_sign_out">Cerrar sesión</string>
+    <string name="toolbar_title">Regresar</string>
+    <string name="toolbar_title_main">Bienvenido</string>
+    <string name="send_document_title">Envío de documentación</string>
+    <string name="view_document_title">Documentos</string>
+    <string name="spinner_cities">Ciudades</string>
+    <string name="image_send_description">Imagen del documento</string>
+    <string name="text_type_document">Tipo de documento:</string>
+    <string name="text_city">Ciudad:</string>
+    <string name="text_document_number">Número de documento</string>
+    <string name="text_user_names">Nombre(s)</string>
+    <string name="text_user_lastname">Apellido(s)</string>
+    <string name="publication_date">Fecha de envío:</string>
+    <string name="text_sent_by">Enviado por:</string>
+    <string name="dialog_title_add_img">Seleccione una opción</string>
+    <string name="dialog_select_img">Seleccionar foto de galería</string>
+    <string name="dialog_open_camera">Tomar foto de la cámara</string>
+    <string name="title_fragment_map">Oficinas</string>
+    <string name="dialog_language_title">Seleccione idioma</string>
+    <string name="dialog_language_english">Inglés</string>
+    <string name="dialog_language_spanish">Español</string>
+</resources>

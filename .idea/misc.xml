@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable-v24/custom_button_send.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable-v24/custom_button_senddoc.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable-v24/send_doc_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable-v24/senddoc_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/border_view_offices.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/border_view_send.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/border_view_viewdocs.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_border_textinput.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_fingerprint.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_main_send.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_offices.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_send.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_signin.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_view.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/fingerprint_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_arrow_office.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_arrow_send.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_arrow_view.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_baseline_location.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_fingerprint_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_language_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_location_office.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_send_docs.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_theme_color.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_view_document.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/main_send_doc_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/offices_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/send_doc_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/signin_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/view_doc_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/activity_offices_map.xml" value="0.3292572463768116" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/activity_send_document.xml" value="0.3292572463768116" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/activity_sign_in.xml" value="0.30434782608695654" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/activity_view_document.xml" value="0.3292572463768116" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/custom_dialog_add_img.xml" value="0.33" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/fragment_map.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/item_document.xml" value="0.33" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/map_layout.xml" value="0.3750665956313266" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

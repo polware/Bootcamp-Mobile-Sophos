@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sophos Mobile App</string>
+    <string name="logo_description">Sophos Logo</string>
+    <string name="signin_message">Enter your data to access</string>
+    <string name="input_password">Password</string>
+    <string name="input_email">Email</string>
+    <string name="button_signin">Sign In</string>
+    <string name="button_fingerprint">Sign in with fingerprint</string>
+    <string name="welcome_sophos">Welcome Sophos</string>
+    <string name="send_documents">Send documents</string>
+    <string name="button_main">Enter</string>
+    <string name="view_documents">View documents</string>
+    <string name="offices">Offices</string>
+    <string name="menu_theme_mode">Theme light/dark</string>
+    <string name="menu_language">Language</string>
+    <string name="menu_sign_out">Sign out</string>
+    <string name="toolbar_title">Back</string>
+    <string name="toolbar_title_main">Welcome</string>
+    <string name="send_document_title">Sending documentation</string>
+    <string name="view_document_title">Documents</string>
+    <string name="spinner_cities">Cities</string>
+    <string name="image_send_description">Document image</string>
+    <string name="text_type_document">Document type:</string>
+    <string name="text_city">City:</string>
+    <string name="text_document_number">Document number</string>
+    <string name="text_user_names">Names</string>
+    <string name="text_user_lastname">Last name</string>
+    <string name="publication_date">Publication date:</string>
+    <string name="text_sent_by">Sent by:</string>
+    <string name="dialog_title_add_img">Select an option</string>
+    <string name="dialog_select_img">Select photo from gallery</string>
+    <string name="dialog_open_camera">Take photo from camera</string>
+    <string name="title_fragment_map">Offices</string>
+    <string name="dialog_language_title">Select language</string>
+    <string name="dialog_language_english">English</string>
+    <string name="dialog_language_spanish">Spanish</string>
+</resources>
