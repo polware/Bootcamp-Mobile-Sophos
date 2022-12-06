@@ -11,7 +11,8 @@
     <string name="button_main">Enter</string>
     <string name="view_documents">View documents</string>
     <string name="offices">Offices</string>
-    <string name="menu_theme_mode">Theme light/dark</string>
+    <string name="menu_light_theme">Dark theme</string>
+    <string name="menu_dark_theme">Light theme</string>
     <string name="menu_language">Language</string>
     <string name="menu_sign_out">Sign out</string>
     <string name="toolbar_title">Back</string>

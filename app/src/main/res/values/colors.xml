@@ -9,11 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#7800FD</color>
     <color name="pink">#FE41A7</color>
-    <color name="green">#05667C</color>
+    <color name="green">#08627A</color>
     <color name="dark_background">#3A275B</color>
     <color name="dark_pink">#C31880</color>
+    <color name="dark_blue">#420CCD</color>
     <color name="light_pink">#F2128D</color>
     <color name="blue">#4b86b4</color>
-    <color name="dark_green">#08627A</color>
-    <color name="light_cian">#2ab7ca</color>
+    <color name="dark_green">#155372</color>
+    <color name="light_cian">#0e9aa7</color>
 </resources>

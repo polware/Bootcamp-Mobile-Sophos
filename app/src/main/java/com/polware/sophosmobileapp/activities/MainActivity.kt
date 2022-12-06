@@ -2,7 +2,9 @@ package com.polware.sophosmobileapp.activities
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
@@ -10,12 +12,15 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.polware.sophosmobileapp.R
+import com.polware.sophosmobileapp.activities.SignInActivity.Companion.SELECTED_THEME
 import com.polware.sophosmobileapp.databinding.ActivityMainBinding
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingMain: ActivityMainBinding
+    private lateinit var mySharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +65,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, OfficesMapActivity::class.java))
                 true
             }
+            R.id.action_mode_theme -> {
+                changeAppTheme()
+                true
+            }
             R.id.action_language -> {
                 val addImageDialog = AlertDialog.Builder(this)
                 addImageDialog.setTitle(resources.getString(R.string.dialog_language_title))
@@ -76,6 +85,24 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun changeAppTheme() {
+        mySharedPreferences = getSharedPreferences(SignInActivity.PREFERENCES_THEME, Context.MODE_PRIVATE)
+        val editor = mySharedPreferences.edit()
+        val themeState = mySharedPreferences.getString(SELECTED_THEME, "")
+        if (themeState.equals("dark_mode")) {
+            // If dark mode is ON, it will turn off
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            editor.putString(SELECTED_THEME, "light_mode")
+            editor.apply()
+        }
+        else {
+            // If dark mode is OFF, it will turn on
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            editor.putString(SELECTED_THEME, "dark_mode")
+            editor.apply()
         }
     }
 

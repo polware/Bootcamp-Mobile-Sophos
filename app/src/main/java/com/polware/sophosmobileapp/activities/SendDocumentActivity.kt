@@ -5,7 +5,9 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -26,6 +28,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.fondesa.kpermissions.PermissionStatus
 import com.fondesa.kpermissions.allGranted
@@ -34,14 +37,15 @@ import com.fondesa.kpermissions.anyShouldShowRationale
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.request.PermissionRequest
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.databinding.ActivitySendDocumentBinding
 import com.polware.sophosmobileapp.data.models.Cities
 import com.polware.sophosmobileapp.data.models.DocumentType
+import com.polware.sophosmobileapp.databinding.ActivitySendDocumentBinding
 import java.io.*
 import java.util.*
 
 class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
     private lateinit var bindingSendDoc: ActivitySendDocumentBinding
+    private lateinit var mySharedPreferences: SharedPreferences
     private var activityResultLauncherImageSelected: ActivityResultLauncher<Intent>? = null
     private var activityResultLauncherCameraPhoto: ActivityResultLauncher<Intent>? = null
     private val requestPermissionCamera by lazy {
@@ -75,22 +79,36 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
         }
         registerActivityForImageSelected()
         registerActivityForCameraPhoto()
-
-        // Declare spinner for cities
-        var spinnerAdapter = ArrayAdapter(applicationContext,
-            android.R.layout.simple_spinner_item, Cities.getCities())
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        bindingSendDoc.spinnerCity.adapter = spinnerAdapter
-        // Declare spinner for document type
-        spinnerAdapter = ArrayAdapter(applicationContext,
-            android.R.layout.simple_spinner_item, DocumentType.getTypes())
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        bindingSendDoc.spinnerDocument.adapter = spinnerAdapter
+        setupSpinnersView()
 
         bindingSendDoc.imageViewPhoto.setOnClickListener {
             customDialogForImage()
         }
 
+    }
+
+    private fun setupSpinnersView(){
+        var spinnerAdapter: ArrayAdapter<String>
+        mySharedPreferences = getSharedPreferences(SignInActivity.PREFERENCES_THEME, MODE_PRIVATE)
+        val value = mySharedPreferences.getString(SignInActivity.SELECTED_THEME, "")
+        if (value.equals("light_mode")) {
+            // Declare spinner for cities
+            spinnerAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, Cities.getCities())
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            bindingSendDoc.spinnerCity.adapter = spinnerAdapter
+            // Declare spinner for document type
+            spinnerAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, DocumentType.getTypes())
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            bindingSendDoc.spinnerDocument.adapter = spinnerAdapter
+        }
+        else {
+            spinnerAdapter = ArrayAdapter(applicationContext, R.layout.spinner_item, Cities.getCities())
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            bindingSendDoc.spinnerCity.adapter = spinnerAdapter
+            spinnerAdapter = ArrayAdapter(applicationContext, R.layout.spinner_item, DocumentType.getTypes())
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            bindingSendDoc.spinnerDocument.adapter = spinnerAdapter
+        }
     }
 
     private fun customDialogForImage(){
@@ -127,6 +145,10 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
             }
             R.id.action_office_map -> {
                 startActivity(Intent(this, OfficesMapActivity::class.java))
+                true
+            }
+            R.id.action_mode_theme -> {
+                changeAppTheme()
                 true
             }
             R.id.action_language -> {
@@ -255,6 +277,24 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun changeAppTheme() {
+        mySharedPreferences = getSharedPreferences(SignInActivity.PREFERENCES_THEME, Context.MODE_PRIVATE)
+        val editor = mySharedPreferences.edit()
+        val themeState = mySharedPreferences.getString(SignInActivity.SELECTED_THEME, "")
+        if (themeState.equals("dark_mode")) {
+            // If dark mode is ON, it will turn off
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            editor.putString(SignInActivity.SELECTED_THEME, "light_mode")
+            editor.apply()
+        }
+        else {
+            // If dark mode is OFF, it will turn on
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            editor.putString(SignInActivity.SELECTED_THEME, "dark_mode")
+            editor.apply()
+        }
     }
 
     private fun changeLanguage(activity: Activity, languageCode: String) {

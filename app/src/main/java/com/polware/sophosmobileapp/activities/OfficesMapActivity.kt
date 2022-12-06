@@ -3,22 +3,20 @@ package com.polware.sophosmobileapp.activities
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
@@ -86,6 +84,10 @@ class OfficesMapActivity : AppCompatActivity(){
             }
             R.id.action_office_map -> {
                 startActivity(Intent(this, OfficesMapActivity::class.java))
+                true
+            }
+            R.id.action_mode_theme -> {
+                changeAppTheme()
                 true
             }
             R.id.action_language -> {
@@ -166,6 +168,24 @@ class OfficesMapActivity : AppCompatActivity(){
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun changeAppTheme() {
+        mySharedPreferences = getSharedPreferences(SignInActivity.PREFERENCES_THEME, Context.MODE_PRIVATE)
+        val editor = mySharedPreferences.edit()
+        val themeState = mySharedPreferences.getString(SignInActivity.SELECTED_THEME, "")
+        if (themeState.equals("dark_mode")) {
+            // If dark mode is ON, it will turn off
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            editor.putString(SignInActivity.SELECTED_THEME, "light_mode")
+            editor.apply()
+        }
+        else {
+            // If dark mode is OFF, it will turn on
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            editor.putString(SignInActivity.SELECTED_THEME, "dark_mode")
+            editor.apply()
+        }
     }
 
     private fun changeLanguage(activity: Activity, languageCode: String) {

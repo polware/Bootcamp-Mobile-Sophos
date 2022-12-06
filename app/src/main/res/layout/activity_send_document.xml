@@ -65,6 +65,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="5dp"
         android:contentDescription="@string/spinner_cities"
+        android:theme="@style/Spinner"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDocument"
         app:layout_constraintStart_toEndOf="@+id/textViewDocument"
         app:layout_constraintTop_toTopOf="@+id/textViewDocument" />
@@ -147,6 +148,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="5dp"
         android:contentDescription="@string/spinner_cities"
+        android:theme="@style/Spinner"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCity"
         app:layout_constraintStart_toEndOf="@+id/textViewCity"
         app:layout_constraintTop_toTopOf="@+id/textViewCity" />

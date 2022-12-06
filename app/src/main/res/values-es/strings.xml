@@ -12,8 +12,9 @@
     <string name="button_main">Ingresar</string>
     <string name="view_documents">Ver documentos</string>
     <string name="offices">Oficinas</string>
-    <string name="menu_theme_mode">Tema día/noche</string>
-    <string name="menu_language">Lenguaje</string>
+    <string name="menu_light_theme">Tema oscuro</string>
+    <string name="menu_dark_theme">Tema claro</string>
+    <string name="menu_language">Idioma</string>
     <string name="menu_sign_out">Cerrar sesión</string>
     <string name="toolbar_title">Regresar</string>
     <string name="toolbar_title_main">Bienvenido</string>

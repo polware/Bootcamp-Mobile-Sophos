@@ -17,14 +17,44 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_send.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_signin.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/custom_button_view.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_border_view_offices.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_border_view_send.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_border_view_viewdocs.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_custom_button_fingerprint.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_custom_button_main_send.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_custom_button_offices.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_custom_button_signin.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_custom_button_view.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_fingerprint_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_account.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_arrow_send.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_document_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_document_image.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_fingerprint_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_language_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_location_office.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_menu_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_password.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_send_docs.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_theme_color.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_ic_view_document.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_main_senddoc_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_offices_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_signin_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/dark_view_doc_button_effect.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/fingerprint_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_account.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_arrow_office.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_arrow_send.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_arrow_view.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_baseline_location.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_document_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_file_add.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_fingerprint_icon.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_language_icon.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_location_office.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_menu_icon.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_password.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_send_docs.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_theme_color.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/ic_view_document.xml" value="0.1" />
@@ -33,6 +63,13 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/send_doc_button_effect.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/signin_button_effect.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/drawable/view_doc_button_effect.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout-night/activity_main.xml" value="0.365625" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout-night/activity_offices_map.xml" value="0.3" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout-night/activity_send_document.xml" value="0.365625" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout-night/activity_sign_in.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout-night/activity_view_document.xml" value="0.33" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout-night/spinner_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout-night/spinner_item_dark.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/activity_offices_map.xml" value="0.3292572463768116" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/activity_send_document.xml" value="0.3292572463768116" />
@@ -42,6 +79,8 @@
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/fragment_map.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/item_document.xml" value="0.33" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/map_layout.xml" value="0.3750665956313266" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/layout/spinner_item.xml" value="0.365625" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/menu-night/menu_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SophosMobileApp/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
       </map>
     </option>
