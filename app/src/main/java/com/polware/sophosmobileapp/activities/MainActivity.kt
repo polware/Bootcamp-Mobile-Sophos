@@ -18,7 +18,7 @@ import com.polware.sophosmobileapp.activities.SignInActivity.Companion.SELECTED_
 import com.polware.sophosmobileapp.databinding.ActivityMainBinding
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
     private lateinit var bindingMain: ActivityMainBinding
     private lateinit var mySharedPreferences: SharedPreferences
 
@@ -84,11 +84,15 @@ class MainActivity : AppCompatActivity() {
                 addImageDialog.show()
                 true
             }
+            R.id.action_sign_out -> {
+                signOut()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun changeAppTheme() {
+    fun changeAppTheme() {
         mySharedPreferences = getSharedPreferences(SignInActivity.PREFERENCES_THEME, Context.MODE_PRIVATE)
         val editor = mySharedPreferences.edit()
         val themeState = mySharedPreferences.getString(SELECTED_THEME, "")
@@ -106,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeLanguage(activity: Activity, languageCode: String) {
+    fun changeLanguage(activity: Activity, languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
         val resources: Resources = activity.resources
@@ -116,6 +120,11 @@ class MainActivity : AppCompatActivity() {
         val refresh = Intent(this, activity::class.java)
         refresh.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(refresh)
+    }
+
+    fun signOut() {
+        startActivity(Intent(this, SignInActivity::class.java))
+        finish()
     }
 
 }

@@ -1,22 +1,17 @@
 package com.polware.sophosmobileapp.activities
 
 import android.Manifest
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
@@ -28,9 +23,8 @@ import com.polware.sophosmobileapp.fragments.MapFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
-class OfficesMapActivity : AppCompatActivity(){
+class OfficesMapActivity : MainActivity(){
     private lateinit var bindingOfficesMap: ActivityOfficesMapBinding
     private val USER_LOCATION_REQUEST_CODE = 100
     var currentFragment: Fragment? = null
@@ -105,6 +99,10 @@ class OfficesMapActivity : AppCompatActivity(){
                 addImageDialog.show()
                 true
             }
+            R.id.action_sign_out -> {
+                signOut()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -132,7 +130,7 @@ class OfficesMapActivity : AppCompatActivity(){
                             Log.e("Error 404", "Not Found")
                         }
                         else -> {
-                            Log.e("Error", "Generic Error")
+                            Log.e("Error", "Network Error")
                         }
                     }
                 }
@@ -168,36 +166,6 @@ class OfficesMapActivity : AppCompatActivity(){
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    private fun changeAppTheme() {
-        mySharedPreferences = getSharedPreferences(SignInActivity.PREFERENCES_THEME, Context.MODE_PRIVATE)
-        val editor = mySharedPreferences.edit()
-        val themeState = mySharedPreferences.getString(SignInActivity.SELECTED_THEME, "")
-        if (themeState.equals("dark_mode")) {
-            // If dark mode is ON, it will turn off
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            editor.putString(SignInActivity.SELECTED_THEME, "light_mode")
-            editor.apply()
-        }
-        else {
-            // If dark mode is OFF, it will turn on
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            editor.putString(SignInActivity.SELECTED_THEME, "dark_mode")
-            editor.apply()
-        }
-    }
-
-    private fun changeLanguage(activity: Activity, languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val resources: Resources = activity.resources
-        val config: Configuration = resources.configuration
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-        val refresh = Intent(this, activity::class.java)
-        refresh.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(refresh)
     }
 
 }

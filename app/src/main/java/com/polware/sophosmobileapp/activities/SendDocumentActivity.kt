@@ -1,16 +1,12 @@
 package com.polware.sophosmobileapp.activities
 
 import android.Manifest
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -27,8 +23,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.fondesa.kpermissions.PermissionStatus
 import com.fondesa.kpermissions.allGranted
@@ -41,9 +35,8 @@ import com.polware.sophosmobileapp.data.models.Cities
 import com.polware.sophosmobileapp.data.models.DocumentType
 import com.polware.sophosmobileapp.databinding.ActivitySendDocumentBinding
 import java.io.*
-import java.util.*
 
-class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
+class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
     private lateinit var bindingSendDoc: ActivitySendDocumentBinding
     private lateinit var mySharedPreferences: SharedPreferences
     private var activityResultLauncherImageSelected: ActivityResultLauncher<Intent>? = null
@@ -166,6 +159,10 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
                 addImageDialog.show()
                 true
             }
+            R.id.action_sign_out -> {
+                signOut()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -211,10 +208,10 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
             val data = result.data
             if (resultCode == RESULT_OK && data != null) {
                 try {
-                    val imageuri = data!!.data
-                    val inputStream = contentResolver.openInputStream(imageuri!!)
+                    val imageUri = data.data
+                    val inputStream = contentResolver.openInputStream(imageUri!!)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
-                    val encodedImage = encodeImageToBase64(bitmap);
+                    val encodedImage = encodeImageToBase64(bitmap)
                     Log.i("BASE64: ", encodedImage)
                     bindingSendDoc.imageViewPhoto.setImageBitmap(bitmap)
                 } catch (e: IOException) {
@@ -277,36 +274,6 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
                 dialog.dismiss()
             }
             .show()
-    }
-
-    private fun changeAppTheme() {
-        mySharedPreferences = getSharedPreferences(SignInActivity.PREFERENCES_THEME, Context.MODE_PRIVATE)
-        val editor = mySharedPreferences.edit()
-        val themeState = mySharedPreferences.getString(SignInActivity.SELECTED_THEME, "")
-        if (themeState.equals("dark_mode")) {
-            // If dark mode is ON, it will turn off
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            editor.putString(SignInActivity.SELECTED_THEME, "light_mode")
-            editor.apply()
-        }
-        else {
-            // If dark mode is OFF, it will turn on
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            editor.putString(SignInActivity.SELECTED_THEME, "dark_mode")
-            editor.apply()
-        }
-    }
-
-    private fun changeLanguage(activity: Activity, languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val resources: Resources = activity.resources
-        val config: Configuration = resources.configuration
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-        val refresh = Intent(this, activity::class.java)
-        refresh.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(refresh)
     }
 
 }
