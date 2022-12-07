@@ -13,7 +13,8 @@
     <string name="offices">Offices</string>
     <string name="menu_light_theme">Dark theme</string>
     <string name="menu_dark_theme">Light theme</string>
-    <string name="menu_language">Language</string>
+    <string name="menu_language_english">English lang.</string>
+    <string name="menu_language_spanish">Spanish lang.</string>
     <string name="menu_sign_out">Sign out</string>
     <string name="toolbar_title">Back</string>
     <string name="toolbar_title_main">Welcome</string>
@@ -35,4 +36,5 @@
     <string name="dialog_language_title">Select language</string>
     <string name="dialog_language_english">English</string>
     <string name="dialog_language_spanish">Spanish</string>
+    <string name="map_title_marker">Your Current Location</string>
 </resources>

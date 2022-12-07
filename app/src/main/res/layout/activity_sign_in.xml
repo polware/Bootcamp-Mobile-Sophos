@@ -50,6 +50,7 @@
             android:drawableStart="@drawable/ic_account"
             android:hint="@string/input_email"
             android:inputType="textEmailAddress"
+            android:textColor="@color/purple"
             android:textColorHint="#7800FD" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,6 +72,7 @@
             android:drawableStart="@drawable/ic_password"
             android:hint="@string/input_password"
             android:inputType="textPassword"
+            android:textColor="@color/purple"
             android:textColorHint="#7800FD"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>

@@ -1,7 +1,6 @@
 package com.polware.sophosmobileapp.activities
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -63,6 +62,7 @@ class OfficesMapActivity : MainActivity(){
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_main,menu)
+        setPopupLanguage(menu)
         return true
     }
 
@@ -85,18 +85,7 @@ class OfficesMapActivity : MainActivity(){
                 true
             }
             R.id.action_language -> {
-                val addImageDialog = AlertDialog.Builder(this)
-                addImageDialog.setTitle(resources.getString(R.string.dialog_language_title))
-                val addImageOptions = arrayOf(resources.getString(R.string.dialog_language_english),
-                    resources.getString(R.string.dialog_language_spanish))
-                addImageDialog.setItems(addImageOptions) {
-                        _, which ->
-                    when(which){
-                        0 -> changeLanguage(this, "en")
-                        1 -> changeLanguage(this, "es")
-                    }
-                }
-                addImageDialog.show()
+                changeLanguage(this, inactiveLanguage)
                 true
             }
             R.id.action_sign_out -> {
@@ -114,7 +103,7 @@ class OfficesMapActivity : MainActivity(){
                 if (response.isSuccessful) {
                     officesList = response.body()
                     Log.i("ResponseResult", "$officesList")
-                    // Storing data in the SharedPreferences
+                    // Storing data in the Shared Preferences
                     val responseJsonString = Gson().toJson(officesList)
                     val editor = mySharedPreferences.edit()
                     editor.putString(OFFICES_LOCATION, responseJsonString)

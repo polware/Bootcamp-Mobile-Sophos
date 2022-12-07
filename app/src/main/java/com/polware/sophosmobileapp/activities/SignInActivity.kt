@@ -1,9 +1,12 @@
 package com.polware.sophosmobileapp.activities
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -12,6 +15,8 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.polware.sophosmobileapp.databinding.ActivitySignInBinding
 import java.util.concurrent.Executor
+
+private const val LOGIN_PREFERENCES = "LoginPreferences"
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var bindingSignIn: ActivitySignInBinding
@@ -32,10 +37,16 @@ class SignInActivity : AppCompatActivity() {
         setContentView(bindingSignIn.root)
 
         getAppTheme()
+        setUserCredentials()
 
         bindingSignIn.buttonSignIn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            val email = bindingSignIn.textInputEmail.text.toString()
+            val password = bindingSignIn.textInputPassword.text.toString()
+            if(validateTextFields(email, password)){
+                savedPreferences(email, password)
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         }
 
         bindingSignIn.buttonFingerprint.setOnClickListener {
@@ -60,6 +71,46 @@ class SignInActivity : AppCompatActivity() {
             editor.putString(SELECTED_THEME, "light_mode")
             editor.apply()
         }
+    }
+
+    private fun validateTextFields(email: String, password: String): Boolean {
+        return if (!validEmail(email)) {
+            Toast.makeText(this, "The email entered does not have a valid format",
+                Toast.LENGTH_LONG).show()
+            false
+        } else if (!validPassword(password)) {
+            Toast.makeText(this, "Password must be at least 4 characters",
+                Toast.LENGTH_LONG).show()
+            false
+        } else {
+            true
+        }
+    }
+
+    private fun validEmail(email: String): Boolean {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun validPassword(password: String): Boolean {
+        return password.length >= 4
+    }
+
+    private fun setUserCredentials() {
+        mySharedPreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE)
+        val email = mySharedPreferences.getString("Email", "")
+        val password = mySharedPreferences.getString("Password", "")
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            bindingSignIn.textInputEmail.setText(email)
+            bindingSignIn.textInputPassword.setText(password)
+        }
+    }
+
+    private fun savedPreferences(email: String, password: String) {
+        mySharedPreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = mySharedPreferences.edit()
+        editor.putString("Email", email)
+        editor.putString("Password", password)
+        editor.apply()
     }
 
     private fun fingerPrintAuth() {

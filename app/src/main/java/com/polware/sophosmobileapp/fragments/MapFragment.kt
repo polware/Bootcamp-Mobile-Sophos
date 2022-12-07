@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
+import android.location.Criteria
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,15 +21,14 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
+import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.activities.OfficesMapActivity
 import com.polware.sophosmobileapp.activities.OfficesMapActivity.Companion.OFFICES_LOCATION
 import com.polware.sophosmobileapp.activities.OfficesMapActivity.Companion.PREFERENCES_NAME
-import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.data.models.OfficesModel
 
 class MapFragment: Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
-    private var locationManager: LocationManager? = null
     private var mapView: MapView? = null
     private var rootView: View? = null
     private lateinit var mySharedPreferences: SharedPreferences
@@ -57,15 +58,15 @@ class MapFragment: Fragment(), OnMapReadyCallback {
     override fun onMapReady(gMap: GoogleMap) {
         mMap = gMap
         gMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-        locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        mMap.isMyLocationEnabled = true;
-        mMap.uiSettings.isZoomControlsEnabled = true;
-        mMap.uiSettings.isCompassEnabled = true;
+        mMap.isMyLocationEnabled = true
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isIndoorLevelPickerEnabled = true
         // Reading offices location from SharedPreferences
         mySharedPreferences = (activity as OfficesMapActivity).getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
         val officeSharedPreferences = mySharedPreferences.getString(OFFICES_LOCATION, "")
         val officesList = Gson().fromJson(officeSharedPreferences, OfficesModel::class.java)
-        for (index in officesList.Items!!.indices){
+        for (index in officesList.Items.indices){
             val latitude = officesList.Items[index].latitude.toDouble()
             val longitude = officesList.Items[index].longitude.toDouble()
             val office = LatLng(latitude, longitude)
@@ -80,9 +81,29 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             val bitmapIcon = BitmapFactory.decodeResource(resources, R.mipmap.icon_location)
             mMap.addMarker(
             MarkerOptions().position(office).title("Sede ${officesList.Items[index].city}")
-                        .snippet("${officesList.Items[index].name}").draggable(true)
+                        .snippet(officesList.Items[index].name).draggable(true)
                         .icon(BitmapDescriptorFactory.fromBitmap(bitmapIcon)))
             }
+        pointToUserLocation()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun pointToUserLocation(){
+        val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val mCriteria = Criteria()
+        val bestProvider = locationManager.getBestProvider(mCriteria, true).toString()
+        val mLocation = locationManager.getLastKnownLocation(bestProvider)
+        if (mLocation != null) {
+            val currentLatitude = mLocation.latitude
+            Log.i("Current Latitude: ", "$currentLatitude")
+            val currentLongitude = mLocation.longitude
+            Log.i("Current Longitude: ", "$currentLongitude")
+            val userLocation = LatLng(currentLatitude, currentLongitude)
+            mMap.addMarker(MarkerOptions().position(userLocation)
+                .title(resources.getString(R.string.map_title_marker)))
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 12f))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(12f), 2000, null)
+        }
     }
 
 }

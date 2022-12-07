@@ -1,6 +1,5 @@
 package com.polware.sophosmobileapp.activities
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
@@ -31,6 +30,7 @@ class ViewDocumentActivity : MainActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_main,menu)
+        setPopupLanguage(menu)
         return true
     }
 
@@ -53,18 +53,7 @@ class ViewDocumentActivity : MainActivity() {
                 true
             }
             R.id.action_language -> {
-                val addImageDialog = AlertDialog.Builder(this)
-                addImageDialog.setTitle(resources.getString(R.string.dialog_language_title))
-                val addImageOptions = arrayOf(resources.getString(R.string.dialog_language_english),
-                    resources.getString(R.string.dialog_language_spanish))
-                addImageDialog.setItems(addImageOptions) {
-                        _, which ->
-                    when(which){
-                        0 -> changeLanguage(this, "en")
-                        1 -> changeLanguage(this, "es")
-                    }
-                }
-                addImageDialog.show()
+                changeLanguage(this, inactiveLanguage)
                 true
             }
             R.id.action_sign_out -> {

@@ -1,13 +1,13 @@
 package com.polware.sophosmobileapp.activities
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -21,6 +21,10 @@ import java.util.*
 open class MainActivity : AppCompatActivity() {
     private lateinit var bindingMain: ActivityMainBinding
     private lateinit var mySharedPreferences: SharedPreferences
+
+    companion object {
+        lateinit var inactiveLanguage: String
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +51,8 @@ open class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_main,menu)
+        inflater.inflate(R.menu.menu_main, menu)
+        setPopupLanguage(menu)
         return true
     }
 
@@ -70,18 +75,7 @@ open class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_language -> {
-                val addImageDialog = AlertDialog.Builder(this)
-                addImageDialog.setTitle(resources.getString(R.string.dialog_language_title))
-                val addImageOptions = arrayOf(resources.getString(R.string.dialog_language_english),
-                    resources.getString(R.string.dialog_language_spanish))
-                addImageDialog.setItems(addImageOptions) {
-                        _, which ->
-                    when(which){
-                        0 -> changeLanguage(this, "en")
-                        1 -> changeLanguage(this, "es")
-                    }
-                }
-                addImageDialog.show()
+                changeLanguage(this, inactiveLanguage)
                 true
             }
             R.id.action_sign_out -> {
@@ -89,6 +83,20 @@ open class MainActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun setPopupLanguage(menu: Menu?){
+        val item: MenuItem = menu!!.findItem(R.id.action_language)
+        val getAppLanguage = resources.configuration.locale.toString()
+        Log.i("APP_LANGUAGE: ", getAppLanguage)
+        if (getAppLanguage == "en_US" || getAppLanguage == "en"){
+            item.title = resources.getString(R.string.menu_language_spanish)
+            inactiveLanguage = "es"
+        }
+        else {
+            item.title = resources.getString(R.string.menu_language_english)
+            inactiveLanguage = "en"
         }
     }
 
