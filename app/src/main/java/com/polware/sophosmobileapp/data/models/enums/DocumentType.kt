@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.data.models
+package com.polware.sophosmobileapp.data.models.enums
 
 enum class DocumentType(val type: String, val text: String) {
     CEDULA("CC", "Cédula"),

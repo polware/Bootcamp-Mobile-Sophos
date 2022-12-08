@@ -19,7 +19,7 @@
         android:id="@+id/textViewTitleFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_background"
+        android:background="@color/dark_pink"
         android:gravity="center_horizontal"
         android:text="@string/title_fragment_map"
         android:textColor="@color/white"

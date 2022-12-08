@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.activities
+package com.polware.sophosmobileapp.view.activities
 
 import android.app.Activity
 import android.content.Context

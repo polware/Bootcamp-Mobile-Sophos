@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.data.models
+package com.polware.sophosmobileapp.data.models.enums
 
 enum class Cities(val city: String, val idOffice: Int) {
     MEDELLIN1("Medellín S1", 1),

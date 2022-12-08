@@ -7,8 +7,8 @@ class NewDocument(
     lastName: String,
     city: String,
     email: String,
+    attachedImage: String,
     fileType: String,
-    attachedImage: String
 ) {
     var TipoId: String? = idType
     var Identificacion: String? = id
@@ -16,6 +16,6 @@ class NewDocument(
     var Apellido: String? = lastName
     var Ciudad: String? = city
     var Correo: String? = email
-    var TipoAdjunto: String? = fileType
-    var Adjunto: String? = attachedImage
+    var TipoAdjunto: String? = attachedImage
+    var Adjunto: String? = fileType
 }

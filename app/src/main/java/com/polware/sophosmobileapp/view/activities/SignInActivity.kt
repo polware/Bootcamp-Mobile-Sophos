@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.activities
+package com.polware.sophosmobileapp.view.activities
 
 import android.content.Context
 import android.content.Intent
@@ -13,12 +13,11 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.polware.sophosmobileapp.data.Constants.LOGIN_PREFERENCES
 import com.polware.sophosmobileapp.data.Constants.PREFERENCES_THEME
 import com.polware.sophosmobileapp.data.Constants.SELECTED_THEME
 import com.polware.sophosmobileapp.databinding.ActivitySignInBinding
 import java.util.concurrent.Executor
-
-private const val LOGIN_PREFERENCES = "LoginPreferences"
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var bindingSignIn: ActivitySignInBinding

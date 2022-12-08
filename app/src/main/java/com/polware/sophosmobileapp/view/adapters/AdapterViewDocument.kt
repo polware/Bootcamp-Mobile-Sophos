@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.adapters
+package com.polware.sophosmobileapp.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.polware.sophosmobileapp.data.models.DocumentItems
 import com.polware.sophosmobileapp.databinding.ItemDocumentBinding
 
-class AdapterViewDocument(private val documents: List<DocumentItems>,
-                          private val documentListener: (image: String) -> Unit):
+class AdapterViewDocument(private val documentListener: (image: String) -> Unit):
     RecyclerView.Adapter<AdapterViewDocument.ViewHolder>() {
+
+    private var documents = ArrayList<DocumentItems>()
+
+    fun setDocumentList(documentList : List<DocumentItems>){
+        this.documents = documentList as ArrayList<DocumentItems>
+        notifyDataSetChanged()
+    }
 
     // Binding del layout "item_document"
     class ViewHolder(bindingAdapter: ItemDocumentBinding):

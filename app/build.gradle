@@ -59,4 +59,8 @@ dependencies {
     implementation 'com.github.fondesa:kpermissions:3.4.0'
     // Biometric Authentication
     implementation 'androidx.biometric:biometric-ktx:1.2.0-alpha04'
+    // ViewModel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    // LiveData
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 }

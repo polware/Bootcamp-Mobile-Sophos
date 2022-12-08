@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.fragments
+package com.polware.sophosmobileapp.view.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.activities.OfficesMapActivity
+import com.polware.sophosmobileapp.view.activities.OfficesMapActivity
 import com.polware.sophosmobileapp.data.Constants.OFFICES_LOCATION
 import com.polware.sophosmobileapp.data.Constants.PREFERENCES_NAME
 import com.polware.sophosmobileapp.data.models.OfficesModel

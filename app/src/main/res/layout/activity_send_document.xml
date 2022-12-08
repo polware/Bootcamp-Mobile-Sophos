@@ -7,8 +7,8 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.SendDocumentActivity">
+    android:layout_height="wrap_content"
+    tools:context=".view.activities.SendDocumentActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarSendDocs"
@@ -159,7 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/send_doc_button_effect"
-        android:text="Enviar"
+        android:text="@string/button_send_document"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"

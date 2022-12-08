@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.activities
+package com.polware.sophosmobileapp.view.activities
 
 import android.Manifest
 import android.content.Context
@@ -6,31 +6,25 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.gson.Gson
+import androidx.lifecycle.ViewModelProvider
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.data.Constants.OFFICES_LOCATION
 import com.polware.sophosmobileapp.data.Constants.PREFERENCES_NAME
-import com.polware.sophosmobileapp.data.models.OfficesModel
-import com.polware.sophosmobileapp.data.RetrofitBuilder
 import com.polware.sophosmobileapp.databinding.ActivityOfficesMapBinding
-import com.polware.sophosmobileapp.fragments.MapFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.HttpException
-import retrofit2.Response
+import com.polware.sophosmobileapp.view.fragments.MapFragment
+import com.polware.sophosmobileapp.viewmodels.OfficeViewModelFactory
+import com.polware.sophosmobileapp.viewmodels.OfficesMapViewModel
 
 class OfficesMapActivity : MainActivity(){
     private lateinit var bindingOfficesMap: ActivityOfficesMapBinding
     private val USER_LOCATION_REQUEST_CODE = 100
     var currentFragment: Fragment? = null
-    private var officesList: OfficesModel? = null
+    private lateinit var viewModel: OfficesMapViewModel
     private lateinit var mySharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +38,9 @@ class OfficesMapActivity : MainActivity(){
         actionBar.title = resources.getString(R.string.toolbar_title)
 
         mySharedPreferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
-        getOfficeList()
+        viewModel = ViewModelProvider(this,
+            OfficeViewModelFactory(mySharedPreferences))[OfficesMapViewModel::class.java]
+        viewModel.getOfficesList()
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
@@ -92,34 +88,6 @@ class OfficesMapActivity : MainActivity(){
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun getOfficeList() {
-        try {
-            val officesCall: Call<OfficesModel> = RetrofitBuilder.retrofitService.getAllOffices()
-            officesCall.enqueue(object: Callback<OfficesModel> {
-
-                override fun onResponse(call: Call<OfficesModel>, response: Response<OfficesModel>) {
-                    if (response.isSuccessful) {
-                        officesList = response.body()
-                        Log.i("ResponseResult", "$officesList")
-                        // Storing data in the Shared Preferences
-                        val responseJsonString = Gson().toJson(officesList)
-                        val editor = mySharedPreferences.edit()
-                        editor.putString(OFFICES_LOCATION, responseJsonString)
-                        editor.apply()
-                    }
-                }
-
-                override fun onFailure(call: Call<OfficesModel>, t: Throwable) {
-                    Log.e("ResponseError: ", t.message.toString())
-                }
-            })
-        } catch (e: HttpException) {
-            Toast.makeText(this, "Connection error!", Toast.LENGTH_SHORT).show()
-            Log.e("HttpException: ", "${e.message}")
-        }
-
     }
 
     private fun requestLocationPermission() {

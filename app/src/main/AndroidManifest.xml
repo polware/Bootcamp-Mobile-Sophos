@@ -21,22 +21,22 @@
         android:theme="@style/Theme.SophosMobileApp"
         tools:targetApi="31">
         <activity
-            android:name=".activities.OfficesMapActivity"
+            android:name="com.polware.sophosmobileapp.view.activities.OfficesMapActivity"
             android:exported="false"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName="com.polware.sophosmobileapp.view.activities.MainActivity"
             android:theme="@style/NoActionBarTheme" />
         <activity
-            android:name=".activities.ViewDocumentActivity"
+            android:name="com.polware.sophosmobileapp.view.activities.ViewDocumentActivity"
             android:exported="false"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName="com.polware.sophosmobileapp.view.activities.MainActivity"
             android:theme="@style/NoActionBarTheme" />
         <activity
-            android:name=".activities.SendDocumentActivity"
+            android:name="com.polware.sophosmobileapp.view.activities.SendDocumentActivity"
             android:exported="false"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName="com.polware.sophosmobileapp.view.activities.MainActivity"
             android:theme="@style/NoActionBarTheme" />
         <activity
-            android:name=".activities.SignInActivity"
+            android:name="com.polware.sophosmobileapp.view.activities.SignInActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme"
             android:windowSoftInputMode="adjustResize">
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.polware.sophosmobileapp.view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme" />
         <meta-data

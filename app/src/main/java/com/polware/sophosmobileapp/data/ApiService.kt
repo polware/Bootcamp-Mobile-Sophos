@@ -17,7 +17,7 @@ interface ApiService {
 
     @GET("RS_Documentos")
     fun getAllDocuments(@Query("appid") app_id: String, @Query("correo") email: String): Call<DocumentModel>
-/**/
+
     @POST("RS_Documentos")
     fun createDocument(@Query("appid") app_id: String,
                        @Body dataDocument: NewDocument): Call<DocumentItems>

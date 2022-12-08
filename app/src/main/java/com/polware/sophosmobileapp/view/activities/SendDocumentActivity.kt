@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.activities
+package com.polware.sophosmobileapp.view.activities
 
 import android.Manifest
 import android.app.AlertDialog
@@ -24,6 +24,8 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.fondesa.kpermissions.PermissionStatus
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.anyPermanentlyDenied
@@ -31,16 +33,14 @@ import com.fondesa.kpermissions.anyShouldShowRationale
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.request.PermissionRequest
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.data.Constants.API_KEY
 import com.polware.sophosmobileapp.data.Constants.PREFERENCES_THEME
 import com.polware.sophosmobileapp.data.Constants.SELECTED_THEME
-import com.polware.sophosmobileapp.data.RetrofitBuilder
 import com.polware.sophosmobileapp.data.models.*
+import com.polware.sophosmobileapp.data.models.enums.Cities
+import com.polware.sophosmobileapp.data.models.enums.DocumentType
 import com.polware.sophosmobileapp.databinding.ActivitySendDocumentBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.HttpException
-import retrofit2.Response
+import com.polware.sophosmobileapp.viewmodels.SendDocViewModelFactory
+import com.polware.sophosmobileapp.viewmodels.SendDocumentViewModel
 import java.io.*
 
 class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
@@ -49,6 +49,7 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
     private var activityResultLauncherImageSelected: ActivityResultLauncher<Intent>? = null
     private var activityResultLauncherCameraPhoto: ActivityResultLauncher<Intent>? = null
     private var encodedImage: String? = null
+    private lateinit var viewModel: SendDocumentViewModel
 
     private val requestPermissionCamera by lazy {
         permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, 
@@ -88,7 +89,7 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
         }
 
         bindingSendDoc.buttonSendDocument.setOnClickListener {
-            validateFormFields()
+            validateFormAndSave()
         }
 
     }
@@ -250,7 +251,7 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
         }
     }
 
-    private fun validateFormFields(){
+    private fun validateFormAndSave(){
         when {
             bindingSendDoc.editTextDocNumber.text.isNullOrEmpty() -> {
                 Toast.makeText(this, resources.getString(R.string.submit_form_id_warning), Toast.LENGTH_SHORT).show()
@@ -268,45 +269,31 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
                 Toast.makeText(this, resources.getString(R.string.submit_form_image_warning), Toast.LENGTH_SHORT).show()
             }
             else -> {
-                saveDocument()
-            }
-        }
-    }
-
-    private fun saveDocument() {
-        val id = bindingSendDoc.editTextDocNumber.text.toString()
-        val documentType = bindingSendDoc.spinnerDocument.selectedItem.toString()
-        val name = bindingSendDoc.editTextNames.text.toString()
-        val lastName = bindingSendDoc.editTextLastName.text.toString()
-        val city = bindingSendDoc.spinnerCity.selectedItem.toString()
-        val email = bindingSendDoc.editTextEmailAddress.text.toString()
-        val fileType = encodedImage
-        val attachedImage = "Image"
-        val newDocument = NewDocument(documentType, id, name, lastName, city,
-            email, fileType!!, attachedImage)
-        try {
-            val newDocumentCall: Call<DocumentItems> = RetrofitBuilder.retrofitService
-                .createDocument(API_KEY, newDocument)
-            newDocumentCall.enqueue(object : Callback<DocumentItems> {
-
-                override fun onResponse(call: Call<DocumentItems>,
-                                        response: Response<DocumentItems>) {
-                    val responseCode = response.code().toString()
-                    Log.i("ResponseCode: ", responseCode)
-                    if (responseCode == "200") {
-                        Toast.makeText(this@SendDocumentActivity,
-                            "Document added to API", Toast.LENGTH_LONG).show()
+                val id = bindingSendDoc.editTextDocNumber.text.toString()
+                val documentType = bindingSendDoc.spinnerDocument.selectedItem.toString()
+                val name = bindingSendDoc.editTextNames.text.toString()
+                val lastName = bindingSendDoc.editTextLastName.text.toString()
+                val city = bindingSendDoc.spinnerCity.selectedItem.toString()
+                val email = bindingSendDoc.editTextEmailAddress.text.toString()
+                val attachedImage = encodedImage
+                val fileType = "Image"
+                val newDocument = NewDocument(documentType, id, name, lastName, city,
+                    email, attachedImage!!, fileType)
+                viewModel = ViewModelProvider(this,
+                    SendDocViewModelFactory(newDocument))[SendDocumentViewModel::class.java]
+                viewModel.saveNewDocument()
+                viewModel.status.observe(this) { status ->
+                    status?.let {
+                        // Reset status value first to prevent multitriggering and to be available to trigger action again
+                        viewModel.status.value = null
+                        Toast.makeText(
+                            this@SendDocumentActivity,
+                            "Document added to API", Toast.LENGTH_LONG
+                        ).show()
                         finish()
                     }
                 }
-
-                override fun onFailure(call: Call<DocumentItems>, t: Throwable) {
-                    Log.e("ErrorSendingDocument: ", t.message.toString())
-                }
-            })
-        } catch (e: HttpException) {
-            Toast.makeText(this, "Connection error!", Toast.LENGTH_SHORT).show()
-            Log.e("HttpException: ", "${e.message}")
+            }
         }
     }
 

@@ -45,4 +45,5 @@
     <string name="submit_form_image_warning">Por favor agregue una imagen</string>
     <string name="view_document_image">Imagen del documento</string>
     <string name="no_records_available">¡Sin registros disponibles!</string>
+    <string name="button_send_document">Enviar</string>
 </resources>
