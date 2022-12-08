@@ -23,8 +23,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.activities.OfficesMapActivity
-import com.polware.sophosmobileapp.activities.OfficesMapActivity.Companion.OFFICES_LOCATION
-import com.polware.sophosmobileapp.activities.OfficesMapActivity.Companion.PREFERENCES_NAME
+import com.polware.sophosmobileapp.data.Constants.OFFICES_LOCATION
+import com.polware.sophosmobileapp.data.Constants.PREFERENCES_NAME
 import com.polware.sophosmobileapp.data.models.OfficesModel
 
 class MapFragment: Fragment(), OnMapReadyCallback {
@@ -66,9 +66,9 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         mySharedPreferences = (activity as OfficesMapActivity).getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
         val officeSharedPreferences = mySharedPreferences.getString(OFFICES_LOCATION, "")
         val officesList = Gson().fromJson(officeSharedPreferences, OfficesModel::class.java)
-        for (index in officesList.Items.indices){
-            val latitude = officesList.Items[index].latitude.toDouble()
-            val longitude = officesList.Items[index].longitude.toDouble()
+        for (index in officesList.CityItems.indices){
+            val latitude = officesList.CityItems[index].latitude.toDouble()
+            val longitude = officesList.CityItems[index].longitude.toDouble()
             val office = LatLng(latitude, longitude)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(office, 12f))
             mMap.animateCamera(CameraUpdateFactory.zoomIn())
@@ -80,8 +80,8 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camera))
             val bitmapIcon = BitmapFactory.decodeResource(resources, R.mipmap.icon_location)
             mMap.addMarker(
-            MarkerOptions().position(office).title("Sede ${officesList.Items[index].city}")
-                        .snippet(officesList.Items[index].name).draggable(true)
+            MarkerOptions().position(office).title("Sede ${officesList.CityItems[index].city}")
+                        .snippet(officesList.CityItems[index].name).draggable(true)
                         .icon(BitmapDescriptorFactory.fromBitmap(bitmapIcon)))
             }
         pointToUserLocation()

@@ -14,7 +14,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.activities.SignInActivity.Companion.SELECTED_THEME
+import com.polware.sophosmobileapp.data.Constants.PREFERENCES_THEME
+import com.polware.sophosmobileapp.data.Constants.SELECTED_THEME
 import com.polware.sophosmobileapp.databinding.ActivityMainBinding
 import java.util.*
 
@@ -101,7 +102,7 @@ open class MainActivity : AppCompatActivity() {
     }
 
     fun changeAppTheme() {
-        mySharedPreferences = getSharedPreferences(SignInActivity.PREFERENCES_THEME, Context.MODE_PRIVATE)
+        mySharedPreferences = getSharedPreferences(PREFERENCES_THEME, Context.MODE_PRIVATE)
         val editor = mySharedPreferences.edit()
         val themeState = mySharedPreferences.getString(SELECTED_THEME, "")
         if (themeState.equals("dark_mode")) {

@@ -11,7 +11,7 @@
         android:layout_width="360dp"
         android:layout_height="2dp"
         android:layout_marginTop="8dp"
-        android:background="@color/black" />
+        android:background="@color/light_pink" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.16"
             android:text="@string/publication_date"
+            android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
 
@@ -38,6 +39,7 @@
             android:layout_weight="0.84"
             android:text="10/12/22"
             android:textAlignment="viewStart"
+            android:textColor="@color/white"
             android:textSize="17sp" />
     </LinearLayout>
 
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.18"
             android:text="@string/text_type_document"
+            android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
 
@@ -66,6 +69,7 @@
             android:layout_weight="0.82"
             android:text="Cédula"
             android:textAlignment="viewStart"
+            android:textColor="@color/white"
             android:textSize="17sp" />
     </LinearLayout>
 
@@ -85,6 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.59"
             android:text="@string/text_sent_by"
+            android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
 
@@ -95,6 +100,7 @@
             android:layout_weight="0.41"
             android:text="Nombre y apellido"
             android:textAlignment="viewStart"
+            android:textColor="@color/white"
             android:textSize="17sp" />
     </LinearLayout>
 

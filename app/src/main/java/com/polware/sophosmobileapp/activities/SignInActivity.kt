@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.polware.sophosmobileapp.data.Constants.PREFERENCES_THEME
+import com.polware.sophosmobileapp.data.Constants.SELECTED_THEME
 import com.polware.sophosmobileapp.databinding.ActivitySignInBinding
 import java.util.concurrent.Executor
 
@@ -24,11 +26,6 @@ class SignInActivity : AppCompatActivity() {
     // Biometric Auth
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
-
-    companion object {
-        const val PREFERENCES_THEME = "ThemePreferences"
-        var SELECTED_THEME = "light_mode"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

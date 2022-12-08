@@ -38,4 +38,11 @@
     <string name="dialog_language_english">Inglés</string>
     <string name="dialog_language_spanish">Español</string>
     <string name="map_title_marker">Su ubicación actual</string>
+    <string name="submit_form_id_warning">Por favor ingrese la identificación</string>
+    <string name="submit_form_name_warning">Por favor ingrese el nombre</string>
+    <string name="submit_form_lastname_warning">Por favor ingrese el apellido</string>
+    <string name="submit_form_email_warning">Por favor ingrese el Email</string>
+    <string name="submit_form_image_warning">Por favor agregue una imagen</string>
+    <string name="view_document_image">Imagen del documento</string>
+    <string name="no_records_available">¡Sin registros disponibles!</string>
 </resources>

@@ -15,12 +15,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.polware.sophosmobileapp.R
+import com.polware.sophosmobileapp.data.Constants.OFFICES_LOCATION
+import com.polware.sophosmobileapp.data.Constants.PREFERENCES_NAME
 import com.polware.sophosmobileapp.data.models.OfficesModel
 import com.polware.sophosmobileapp.data.RetrofitBuilder
 import com.polware.sophosmobileapp.databinding.ActivityOfficesMapBinding
 import com.polware.sophosmobileapp.fragments.MapFragment
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
 
 class OfficesMapActivity : MainActivity(){
@@ -29,11 +32,6 @@ class OfficesMapActivity : MainActivity(){
     var currentFragment: Fragment? = null
     private var officesList: OfficesModel? = null
     private lateinit var mySharedPreferences: SharedPreferences
-
-    companion object {
-        var OFFICES_LOCATION = "bundle_offices_location"
-        const val PREFERENCES_NAME = "OfficesPreference"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,38 +95,31 @@ class OfficesMapActivity : MainActivity(){
     }
 
     private fun getOfficeList() {
-        val officesCall: Call<OfficesModel> = RetrofitBuilder.retrofitService.getAllOffices()
-        officesCall.enqueue(object: Callback<OfficesModel> {
-            override fun onResponse(call: Call<OfficesModel>, response: Response<OfficesModel>) {
-                if (response.isSuccessful) {
-                    officesList = response.body()
-                    Log.i("ResponseResult", "$officesList")
-                    // Storing data in the Shared Preferences
-                    val responseJsonString = Gson().toJson(officesList)
-                    val editor = mySharedPreferences.edit()
-                    editor.putString(OFFICES_LOCATION, responseJsonString)
-                    editor.apply()
-                }
-                else {
-                    // If the response is not success then check the response code
-                    when (response.code()) {
-                        400 -> {
-                            Log.e("Error 400", "Bad Request")
-                        }
-                        404 -> {
-                            Log.e("Error 404", "Not Found")
-                        }
-                        else -> {
-                            Log.e("Error", "Network Error")
-                        }
+        try {
+            val officesCall: Call<OfficesModel> = RetrofitBuilder.retrofitService.getAllOffices()
+            officesCall.enqueue(object: Callback<OfficesModel> {
+
+                override fun onResponse(call: Call<OfficesModel>, response: Response<OfficesModel>) {
+                    if (response.isSuccessful) {
+                        officesList = response.body()
+                        Log.i("ResponseResult", "$officesList")
+                        // Storing data in the Shared Preferences
+                        val responseJsonString = Gson().toJson(officesList)
+                        val editor = mySharedPreferences.edit()
+                        editor.putString(OFFICES_LOCATION, responseJsonString)
+                        editor.apply()
                     }
                 }
-            }
 
-            override fun onFailure(call: Call<OfficesModel>, t: Throwable) {
-                Log.e("ResponseError: ", t.message.toString())
-            }
-        })
+                override fun onFailure(call: Call<OfficesModel>, t: Throwable) {
+                    Log.e("ResponseError: ", t.message.toString())
+                }
+            })
+        } catch (e: HttpException) {
+            Toast.makeText(this, "Connection error!", Toast.LENGTH_SHORT).show()
+            Log.e("HttpException: ", "${e.message}")
+        }
+
     }
 
     private fun requestLocationPermission() {

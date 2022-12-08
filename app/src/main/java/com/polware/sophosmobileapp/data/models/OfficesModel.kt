@@ -1,5 +1,8 @@
 package com.polware.sophosmobileapp.data.models
 
+import com.google.gson.annotations.SerializedName
+
 data class OfficesModel(
-    val Items: List<Items>
+    @SerializedName("Items")
+    val CityItems: List<CityItems>
     )

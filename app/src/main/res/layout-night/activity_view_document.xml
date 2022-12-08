@@ -30,10 +30,11 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbarViewDocs" />
 
     <ImageView
-        android:id="@+id/imageViewShowDocument"
+        android:id="@+id/imageViewDocImage"
         android:layout_width="158dp"
         android:layout_height="158dp"
         android:layout_marginTop="15dp"
+        android:contentDescription="@string/view_document_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,8 +46,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewShowDocument" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDocImage"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/textViewNoRecords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/no_records_available"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDocImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

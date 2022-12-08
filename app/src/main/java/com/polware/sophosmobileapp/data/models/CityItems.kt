@@ -2,7 +2,7 @@ package com.polware.sophosmobileapp.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Items(
+data class CityItems(
     @SerializedName("IdOficina")
     val idOffice: Int,
     @SerializedName("Ciudad")
