@@ -13,9 +13,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.databinding.DataBindingUtil
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.data.Constants.PREFERENCES_THEME
-import com.polware.sophosmobileapp.data.Constants.SELECTED_THEME
+import com.polware.sophosmobileapp.data.Constants.LOGIN_PREFERENCES
+import com.polware.sophosmobileapp.data.Constants.THEME_PREFERENCES
+import com.polware.sophosmobileapp.data.Constants.CURRENT_THEME
 import com.polware.sophosmobileapp.databinding.ActivityMainBinding
 import java.util.*
 
@@ -30,11 +32,14 @@ open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindingMain = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(bindingMain.root)
+        //bindingMain = ActivityMainBinding.inflate(layoutInflater)
+        //setContentView(bindingMain.root)
+        bindingMain = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        mySharedPreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE)
+        val userName = mySharedPreferences.getString("Username", "")
         setSupportActionBar(bindingMain.toolbarMain)
         val actionBar = supportActionBar
-        actionBar!!.title = resources.getString(R.string.toolbar_title_main) // Adicionar nombre de usuario
+        actionBar!!.title = userName
 
         bindingMain.buttonSend.setOnClickListener {
             startActivity(Intent(this, SendDocumentActivity::class.java))
@@ -102,19 +107,19 @@ open class MainActivity : AppCompatActivity() {
     }
 
     fun changeAppTheme() {
-        mySharedPreferences = getSharedPreferences(PREFERENCES_THEME, Context.MODE_PRIVATE)
+        mySharedPreferences = getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
         val editor = mySharedPreferences.edit()
-        val themeState = mySharedPreferences.getString(SELECTED_THEME, "")
+        val themeState = mySharedPreferences.getString(CURRENT_THEME, "")
         if (themeState.equals("dark_mode")) {
             // If dark mode is ON, it will turn off
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            editor.putString(SELECTED_THEME, "light_mode")
+            editor.putString(CURRENT_THEME, "light_mode")
             editor.apply()
         }
         else {
             // If dark mode is OFF, it will turn on
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            editor.putString(SELECTED_THEME, "dark_mode")
+            editor.putString(CURRENT_THEME, "dark_mode")
             editor.apply()
         }
     }

@@ -6,43 +6,61 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.textfield.TextInputEditText
+import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.data.Constants.LOGIN_PREFERENCES
-import com.polware.sophosmobileapp.data.Constants.PREFERENCES_THEME
-import com.polware.sophosmobileapp.data.Constants.SELECTED_THEME
+import com.polware.sophosmobileapp.data.Constants.THEME_PREFERENCES
+import com.polware.sophosmobileapp.data.Constants.CURRENT_THEME
 import com.polware.sophosmobileapp.databinding.ActivitySignInBinding
+import com.polware.sophosmobileapp.view.activities.SignInActivity.LoadSavedCredential.EditTextBindingAdapter
+import com.polware.sophosmobileapp.viewmodels.LoginViewModel
 import java.util.concurrent.Executor
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var bindingSignIn: ActivitySignInBinding
     private lateinit var mySharedPreferences: SharedPreferences
+    private lateinit var viewModel: LoginViewModel
+    private lateinit var email: String
+    private lateinit var password: String
     // Biometric Auth
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        bindingSignIn = ActivitySignInBinding.inflate(layoutInflater)
-        setContentView(bindingSignIn.root)
-
+        bindingSignIn = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         getAppTheme()
         setUserCredentials()
 
-        bindingSignIn.buttonSignIn.setOnClickListener {
-            val email = bindingSignIn.textInputEmail.text.toString()
-            val password = bindingSignIn.textInputPassword.text.toString()
-            if(validateTextFields(email, password)){
-                savedPreferences(email, password)
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        viewModel.observeUserLiveData().observe(this){ user ->
+            val userId: String? = user.userId
+            if (userId.isNullOrEmpty()){
+                Toast.makeText(this,
+                    "Email or password is invalid", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val userName = user.name
+                savedPreferences(email, password, userName)
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
+        }
+
+        bindingSignIn.buttonSignIn.setOnClickListener {
+            email = bindingSignIn.textInputEmail.text.toString()
+            password = bindingSignIn.textInputPassword.text.toString()
+            viewModel.validateCredentials(email, password)
+            viewModel.getUser()
         }
 
         bindingSignIn.buttonFingerprint.setOnClickListener {
@@ -53,59 +71,47 @@ class SignInActivity : AppCompatActivity() {
 
     private fun getAppTheme() {
         // Save state of app theme using SharedPreferences
-        mySharedPreferences = getSharedPreferences(PREFERENCES_THEME, MODE_PRIVATE)
+        mySharedPreferences = getSharedPreferences(THEME_PREFERENCES, MODE_PRIVATE)
         val editor = mySharedPreferences.edit()
-        val value = mySharedPreferences.getString(SELECTED_THEME, "")
+        val value = mySharedPreferences.getString(CURRENT_THEME, "")
         // Loading theme(dark/light mode) saved when reopen the app
         if (value.equals("dark_mode")) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            editor.putString(SELECTED_THEME, "dark_mode")
+            editor.putString(CURRENT_THEME, "dark_mode")
             editor.apply()
         }
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            editor.putString(SELECTED_THEME, "light_mode")
+            editor.putString(CURRENT_THEME, "light_mode")
             editor.apply()
         }
     }
 
-    private fun validateTextFields(email: String, password: String): Boolean {
-        return if (!validEmail(email)) {
-            Toast.makeText(this, "The email entered does not have a valid format",
-                Toast.LENGTH_LONG).show()
-            false
-        } else if (!validPassword(password)) {
-            Toast.makeText(this, "Password must be at least 4 characters",
-                Toast.LENGTH_LONG).show()
-            false
-        } else {
-            true
-        }
-    }
-
-    private fun validEmail(email: String): Boolean {
-        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    private fun validPassword(password: String): Boolean {
-        return password.length >= 4
-    }
-
     private fun setUserCredentials() {
         mySharedPreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE)
-        val email = mySharedPreferences.getString("Email", "")
-        val password = mySharedPreferences.getString("Password", "")
-        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            bindingSignIn.textInputEmail.setText(email)
-            bindingSignIn.textInputPassword.setText(password)
+        val userEmail = mySharedPreferences.getString("Email", "")
+        val userPassword = mySharedPreferences.getString("Password", "")
+        if (!TextUtils.isEmpty(userEmail) && !TextUtils.isEmpty(userPassword)) {
+            EditTextBindingAdapter(bindingSignIn.textInputEmail, userEmail!!)
+            bindingSignIn.textInputPassword.setText(userPassword)
         }
     }
 
-    private fun savedPreferences(email: String, password: String) {
+    object LoadSavedCredential {
+        @JvmStatic @BindingAdapter("android:text")
+        fun EditTextBindingAdapter(view: TextInputEditText, email: String?) {
+            if (email == null)
+                return
+            view.setText(email)
+        }
+    }
+
+    private fun savedPreferences(email: String, password: String, username: String) {
         mySharedPreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = mySharedPreferences.edit()
         editor.putString("Email", email)
         editor.putString("Password", password)
+        editor.putString("Username", username)
         editor.apply()
     }
 

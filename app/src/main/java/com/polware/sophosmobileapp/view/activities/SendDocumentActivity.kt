@@ -24,7 +24,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.fondesa.kpermissions.PermissionStatus
 import com.fondesa.kpermissions.allGranted
@@ -33,8 +33,8 @@ import com.fondesa.kpermissions.anyShouldShowRationale
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.request.PermissionRequest
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.data.Constants.PREFERENCES_THEME
-import com.polware.sophosmobileapp.data.Constants.SELECTED_THEME
+import com.polware.sophosmobileapp.data.Constants.THEME_PREFERENCES
+import com.polware.sophosmobileapp.data.Constants.CURRENT_THEME
 import com.polware.sophosmobileapp.data.models.*
 import com.polware.sophosmobileapp.data.models.enums.Cities
 import com.polware.sophosmobileapp.data.models.enums.DocumentType
@@ -63,8 +63,9 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindingSendDoc = ActivitySendDocumentBinding.inflate(layoutInflater)
-        setContentView(bindingSendDoc.root)
+        //bindingSendDoc = ActivitySendDocumentBinding.inflate(layoutInflater)
+        //setContentView(bindingSendDoc.root)
+        bindingSendDoc = DataBindingUtil.setContentView(this, R.layout.activity_send_document)
         setSupportActionBar(bindingSendDoc.toolbarSendDocs)
         val actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -96,8 +97,8 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
 
     private fun setupSpinnersView(){
         var spinnerAdapter: ArrayAdapter<String>
-        mySharedPreferences = getSharedPreferences(PREFERENCES_THEME, MODE_PRIVATE)
-        val value = mySharedPreferences.getString(SELECTED_THEME, "")
+        mySharedPreferences = getSharedPreferences(THEME_PREFERENCES, MODE_PRIVATE)
+        val value = mySharedPreferences.getString(CURRENT_THEME, "")
         if (value.equals("light_mode")) {
             // Declare spinner for cities
             spinnerAdapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, Cities.getCities())

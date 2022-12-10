@@ -10,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,8 +28,9 @@ class ViewDocumentActivity : MainActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindingViewDoc = ActivityViewDocumentBinding.inflate(layoutInflater)
-        setContentView(bindingViewDoc.root)
+        //bindingViewDoc = ActivityViewDocumentBinding.inflate(layoutInflater)
+        //setContentView(bindingViewDoc.root)
+        bindingViewDoc = DataBindingUtil.setContentView(this, R.layout.activity_view_document)
         setSupportActionBar(bindingViewDoc.toolbarViewDocs)
         val actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)

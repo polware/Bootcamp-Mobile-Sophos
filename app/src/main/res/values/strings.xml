@@ -13,11 +13,10 @@
     <string name="offices">Offices</string>
     <string name="menu_light_theme">Dark theme</string>
     <string name="menu_dark_theme">Light theme</string>
-    <string name="menu_language_english">English lang.</string>
-    <string name="menu_language_spanish">Spanish lang.</string>
+    <string name="menu_language_english">English language</string>
+    <string name="menu_language_spanish">Spanish language</string>
     <string name="menu_sign_out">Sign out</string>
     <string name="toolbar_title">Back</string>
-    <string name="toolbar_title_main">Welcome</string>
     <string name="send_document_title">Sending documentation</string>
     <string name="view_document_title">Documents</string>
     <string name="spinner_cities">Cities</string>
@@ -33,9 +32,6 @@
     <string name="dialog_select_img">Select photo from gallery</string>
     <string name="dialog_open_camera">Take photo from camera</string>
     <string name="title_fragment_map">Offices</string>
-    <string name="dialog_language_title">Select language</string>
-    <string name="dialog_language_english">English</string>
-    <string name="dialog_language_spanish">Spanish</string>
     <string name="map_title_marker">Your Current Location</string>
     <string name="submit_form_id_warning">Please enter a ID</string>
     <string name="submit_form_name_warning">Please enter a name</string>

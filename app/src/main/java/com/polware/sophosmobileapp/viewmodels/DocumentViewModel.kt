@@ -20,7 +20,7 @@ class DocumentViewModel: ViewModel() {
         RetrofitBuilder.api.getAllDocuments(API_KEY, EMAIL).enqueue(object :
             Callback<DocumentModel> {
             override fun onResponse(call: Call<DocumentModel>, response: Response<DocumentModel>) {
-                if (response.body()!=null){
+                if (response.body() != null){
                     documentLiveData.value = response.body()!!.documentItems
                 }
                 else {
@@ -33,7 +33,8 @@ class DocumentViewModel: ViewModel() {
             }
         })
     }
-    fun observeDocumentLiveData() : LiveData<List<DocumentItems>> {
+
+    fun observeDocumentLiveData(): LiveData<List<DocumentItems>> {
         return documentLiveData
     }
 }

@@ -11,10 +11,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.data.Constants.PREFERENCES_NAME
+import com.polware.sophosmobileapp.data.Constants.OFFICE_PREFERENCES
 import com.polware.sophosmobileapp.databinding.ActivityOfficesMapBinding
 import com.polware.sophosmobileapp.view.fragments.MapFragment
 import com.polware.sophosmobileapp.viewmodels.OfficeViewModelFactory
@@ -30,14 +31,15 @@ class OfficesMapActivity : MainActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindingOfficesMap = ActivityOfficesMapBinding.inflate(layoutInflater)
-        setContentView(bindingOfficesMap.root)
+        //bindingOfficesMap = ActivityOfficesMapBinding.inflate(layoutInflater)
+        //setContentView(bindingOfficesMap.root)
+        bindingOfficesMap = DataBindingUtil.setContentView(this, R.layout.activity_offices_map)
         setSupportActionBar(bindingOfficesMap.toolbarMap)
         val actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar.title = resources.getString(R.string.toolbar_title)
 
-        mySharedPreferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+        mySharedPreferences = getSharedPreferences(OFFICE_PREFERENCES, Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(this,
             OfficeViewModelFactory(mySharedPreferences))[OfficesMapViewModel::class.java]
         viewModel.getOfficesList()

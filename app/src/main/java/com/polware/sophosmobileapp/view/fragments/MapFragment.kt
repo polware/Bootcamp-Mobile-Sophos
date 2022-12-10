@@ -2,6 +2,7 @@ package com.polware.sophosmobileapp.view.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.location.Criteria
@@ -24,7 +25,7 @@ import com.google.gson.Gson
 import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.view.activities.OfficesMapActivity
 import com.polware.sophosmobileapp.data.Constants.OFFICES_LOCATION
-import com.polware.sophosmobileapp.data.Constants.PREFERENCES_NAME
+import com.polware.sophosmobileapp.data.Constants.OFFICE_PREFERENCES
 import com.polware.sophosmobileapp.data.models.OfficesModel
 
 class MapFragment: Fragment(), OnMapReadyCallback {
@@ -63,7 +64,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isIndoorLevelPickerEnabled = true
         // Reading offices location from SharedPreferences
-        mySharedPreferences = (activity as OfficesMapActivity).getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+        mySharedPreferences = (activity as OfficesMapActivity).getSharedPreferences(OFFICE_PREFERENCES, MODE_PRIVATE)
         val officeSharedPreferences = mySharedPreferences.getString(OFFICES_LOCATION, "")
         val officesList = Gson().fromJson(officeSharedPreferences, OfficesModel::class.java)
         for (index in officesList.CityItems.indices){

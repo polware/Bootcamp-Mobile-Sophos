@@ -31,9 +31,7 @@ class AdapterViewDocument(private val documentListener: (image: String) -> Unit)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //val documentImage = documents[position].attachedFile
         val documentImage = documents[position].fileType
-
         val dateFormat = (documents[position].date).split("T").toTypedArray()
         holder.documentDate.text = dateFormat[0]
         holder.documentType.text = documents[position].docType
