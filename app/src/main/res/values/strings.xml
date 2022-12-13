@@ -41,4 +41,6 @@
     <string name="view_document_image">Document image</string>
     <string name="no_records_available">No records available!</string>
     <string name="button_send_document">Send</string>
+    <string name="message_invalid_emailpassword">Email or password is invalid</string>
+    <string name="message_alert_empty_fields">Please fill all fields</string>
 </resources>

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.polware.sophosmobileapp.data.Constants
-import com.polware.sophosmobileapp.data.RetrofitBuilder
+import com.polware.sophosmobileapp.data.api.RetrofitBuilder
 import com.polware.sophosmobileapp.data.models.DocumentItems
 import com.polware.sophosmobileapp.data.models.NewDocument
 import retrofit2.Call

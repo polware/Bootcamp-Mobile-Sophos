@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.data
+package com.polware.sophosmobileapp.data.api
 
 import com.polware.sophosmobileapp.data.models.*
 import retrofit2.Call

@@ -4,6 +4,9 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.library.baseAdapters.BR
 
+/**
+ * This model class class is linked to layout "activity_sign_in"
+ */
 class LoginInfo: BaseObservable() {
 
     var userName: String? = null

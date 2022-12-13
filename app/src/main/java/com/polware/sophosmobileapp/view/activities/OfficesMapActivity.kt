@@ -1,9 +1,7 @@
 package com.polware.sophosmobileapp.view.activities
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
@@ -13,12 +11,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.data.Constants.OFFICE_PREFERENCES
 import com.polware.sophosmobileapp.databinding.ActivityOfficesMapBinding
 import com.polware.sophosmobileapp.view.fragments.MapFragment
-import com.polware.sophosmobileapp.viewmodels.OfficeViewModelFactory
 import com.polware.sophosmobileapp.viewmodels.OfficesMapViewModel
 
 class OfficesMapActivity : MainActivity(){
@@ -26,23 +21,15 @@ class OfficesMapActivity : MainActivity(){
     private val USER_LOCATION_REQUEST_CODE = 100
     var currentFragment: Fragment? = null
     private lateinit var viewModel: OfficesMapViewModel
-    private lateinit var mySharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //bindingOfficesMap = ActivityOfficesMapBinding.inflate(layoutInflater)
-        //setContentView(bindingOfficesMap.root)
         bindingOfficesMap = DataBindingUtil.setContentView(this, R.layout.activity_offices_map)
         setSupportActionBar(bindingOfficesMap.toolbarMap)
         val actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar.title = resources.getString(R.string.toolbar_title)
-
-        mySharedPreferences = getSharedPreferences(OFFICE_PREFERENCES, Context.MODE_PRIVATE)
-        viewModel = ViewModelProvider(this,
-            OfficeViewModelFactory(mySharedPreferences))[OfficesMapViewModel::class.java]
-        viewModel.getOfficesList()
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {

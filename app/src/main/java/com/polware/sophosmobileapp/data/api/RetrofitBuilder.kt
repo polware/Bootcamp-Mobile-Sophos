@@ -1,4 +1,4 @@
-package com.polware.sophosmobileapp.data
+package com.polware.sophosmobileapp.data.api
 
 import com.polware.sophosmobileapp.data.Constants.BASE_URL
 import retrofit2.Retrofit

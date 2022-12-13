@@ -63,8 +63,6 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //bindingSendDoc = ActivitySendDocumentBinding.inflate(layoutInflater)
-        //setContentView(bindingSendDoc.root)
         bindingSendDoc = DataBindingUtil.setContentView(this, R.layout.activity_send_document)
         setSupportActionBar(bindingSendDoc.toolbarSendDocs)
         val actionBar = supportActionBar
@@ -285,7 +283,7 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
                 viewModel.saveNewDocument()
                 viewModel.status.observe(this) { status ->
                     status?.let {
-                        // Reset status value first to prevent multitriggering and to be available to trigger action again
+                        // Reset status value first to prevent multi triggering and to be available to trigger action again
                         viewModel.status.value = null
                         Toast.makeText(
                             this@SendDocumentActivity,

@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import java.util.regex.Pattern
 
+/**
+ * This repository validates the format of the email and password fields
+ */
 class ValidationRepository(application: Application) {
     var application: Application
     var validEmail: Boolean = false
@@ -13,17 +16,18 @@ class ValidationRepository(application: Application) {
         this.application = application
     }
 
-    fun validateCredentials(emailID:String,password:String): LiveData<String> {
+    fun validateCredentials(emailID: String, password: String): LiveData<String> {
         val loginErrorMessage = MutableLiveData<String>()
         if(isEmailValid(emailID)){
             if(password.length<4 && !isPasswordValid(password)){
-                loginErrorMessage.value = "Invalid Password"
-            }else{
+                loginErrorMessage.value = "Password must have at least 4 characters"
+            } else{
                 //loginErrorMessage.value = "Successful Login"
                 validEmail = true
             }
-        }else{
-            loginErrorMessage.value = "Invalid Email"
+        }
+        else{
+            loginErrorMessage.value = "Email format is invalid"
         }
         return  loginErrorMessage
     }

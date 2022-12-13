@@ -1,0 +1,62 @@
+{
+  "Items": [
+    {
+      "Ciudad": "Chile",
+      "Longitud": "-70.64851440000001",
+      "IdOficina": 7,
+      "Latitud": "33.440570099999995",
+      "Nombre": "Agustinas 833 – Piso 10"
+    },
+    {
+      "Ciudad": "Estados Unidos",
+      "Longitud": "-73.98382049999998",
+      "IdOficina": 8,
+      "Latitud": "40.7504055",
+      "Nombre": "404 Fifth Avenue Tenant LLC"
+    },
+    {
+      "Ciudad": "Bogotá",
+      "Longitud": "-74.044757",
+      "IdOficina": 3,
+      "Latitud": "4.6796679999999995",
+      "Nombre": "Edificio Davivienda - Piso 4"
+    },
+    {
+      "Ciudad": "Medellín",
+      "Longitud": "-75.58021739999998",
+      "IdOficina": 2,
+      "Latitud": "6.218229100000025",
+      "Nombre": "CEOH - 107"
+    },
+    {
+      "Ciudad": "Bogotá",
+      "Longitud": "-74.06940610000004",
+      "IdOficina": 4,
+      "Latitud": "4.612525050021438",
+      "Nombre": "Edificio Tequendama - Piso 30"
+    },
+    {
+      "Ciudad": "Panamá",
+      "Longitud": "-79.5875616999999",
+      "IdOficina": 6,
+      "Latitud": "9.005743200000007",
+      "Nombre": "Ciudad del Saber"
+    },
+    {
+      "Ciudad": "Medellín",
+      "Longitud": "-75.57474939999997",
+      "IdOficina": 1,
+      "Latitud": "6.224464299999994",
+      "Nombre": "Ciudad del Rio - 1009"
+    },
+    {
+      "Ciudad": "México",
+      "Longitud": "-99.16522090000001",
+      "IdOficina": 5,
+      "Latitud": "19.42736700000002",
+      "Nombre": "Torre Reforma Latino - Piso 41"
+    }
+  ],
+  "Count": 8,
+  "ScannedCount": 8
+}

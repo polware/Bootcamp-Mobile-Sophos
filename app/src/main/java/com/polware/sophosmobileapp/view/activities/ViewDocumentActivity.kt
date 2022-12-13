@@ -28,8 +28,6 @@ class ViewDocumentActivity : MainActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //bindingViewDoc = ActivityViewDocumentBinding.inflate(layoutInflater)
-        //setContentView(bindingViewDoc.root)
         bindingViewDoc = DataBindingUtil.setContentView(this, R.layout.activity_view_document)
         setSupportActionBar(bindingViewDoc.toolbarViewDocs)
         val actionBar = supportActionBar

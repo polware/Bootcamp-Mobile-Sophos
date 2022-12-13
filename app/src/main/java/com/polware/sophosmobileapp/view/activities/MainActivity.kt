@@ -32,8 +32,6 @@ open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //bindingMain = ActivityMainBinding.inflate(layoutInflater)
-        //setContentView(bindingMain.root)
         bindingMain = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mySharedPreferences = getSharedPreferences(LOGIN_PREFERENCES, Context.MODE_PRIVATE)
         val userName = mySharedPreferences.getString("Username", "")

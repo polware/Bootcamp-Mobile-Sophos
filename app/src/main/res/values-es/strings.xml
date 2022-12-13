@@ -42,4 +42,6 @@
     <string name="view_document_image">Imagen del documento</string>
     <string name="no_records_available">¡Sin registros disponibles!</string>
     <string name="button_send_document">Enviar</string>
+    <string name="message_invalid_emailpassword">El email o la contraseña es inválida</string>
+    <string name="message_alert_empty_fields">Por favor complete todos los campos</string>
 </resources>

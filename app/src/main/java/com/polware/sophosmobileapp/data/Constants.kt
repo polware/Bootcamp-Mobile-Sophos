@@ -7,6 +7,4 @@ object Constants {
     const val LOGIN_PREFERENCES = "LoginPreferences"
     const val THEME_PREFERENCES = "ThemePreferences"
     const val CURRENT_THEME = "light_mode"
-    const val OFFICES_LOCATION = "bundle_offices_location"
-    const val OFFICE_PREFERENCES = "OfficesPreference"
 }

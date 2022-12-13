@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.polware.sophosmobileapp.data.Constants.API_KEY
 import com.polware.sophosmobileapp.data.Constants.EMAIL
-import com.polware.sophosmobileapp.data.RetrofitBuilder
+import com.polware.sophosmobileapp.data.api.RetrofitBuilder
 import com.polware.sophosmobileapp.data.models.DocumentItems
 import com.polware.sophosmobileapp.data.models.DocumentModel
 import retrofit2.Call
@@ -20,11 +20,8 @@ class DocumentViewModel: ViewModel() {
         RetrofitBuilder.api.getAllDocuments(API_KEY, EMAIL).enqueue(object :
             Callback<DocumentModel> {
             override fun onResponse(call: Call<DocumentModel>, response: Response<DocumentModel>) {
-                if (response.body() != null){
+                if (response.isSuccessful){
                     documentLiveData.value = response.body()!!.documentItems
-                }
-                else {
-                    return
                 }
             }
 

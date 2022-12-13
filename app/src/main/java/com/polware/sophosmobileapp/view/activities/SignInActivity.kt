@@ -25,7 +25,7 @@ import com.polware.sophosmobileapp.view.activities.SignInActivity.LoadSavedCrede
 import com.polware.sophosmobileapp.viewmodels.LoginViewModel
 import java.util.concurrent.Executor
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity: AppCompatActivity() {
     private lateinit var bindingSignIn: ActivitySignInBinding
     private lateinit var mySharedPreferences: SharedPreferences
     private lateinit var viewModel: LoginViewModel
@@ -37,30 +37,38 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         bindingSignIn = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         getAppTheme()
         setUserCredentials()
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         viewModel.observeUserLiveData().observe(this){ user ->
-            val userId: String? = user.userId
-            if (userId.isNullOrEmpty()){
-                Toast.makeText(this,
-                    "Email or password is invalid", Toast.LENGTH_SHORT).show()
-            }
-            else {
+            val userId = user.userId
+            if (userId == "112"){
                 val userName = user.name
                 savedPreferences(email, password, userName)
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
+            }
+            else {
+                Toast.makeText(this,
+                    resources.getString(R.string.message_invalid_emailpassword), Toast.LENGTH_SHORT).show()
             }
         }
 
         bindingSignIn.buttonSignIn.setOnClickListener {
             email = bindingSignIn.textInputEmail.text.toString()
             password = bindingSignIn.textInputPassword.text.toString()
-            viewModel.validateCredentials(email, password)
-            viewModel.getUser()
+            if (email.isNotEmpty() && password.isNotEmpty()){
+                viewModel.validateCredentials(email, password).observe(this) {
+                        message ->
+                    Toast.makeText(this@SignInActivity, message, Toast.LENGTH_LONG).show() }
+                viewModel.getUser()
+            }
+            else {
+                Toast.makeText(this, resources.getString(R.string.message_alert_empty_fields), Toast.LENGTH_SHORT).show()
+            }
         }
 
         bindingSignIn.buttonFingerprint.setOnClickListener {
@@ -93,16 +101,16 @@ class SignInActivity : AppCompatActivity() {
         val userPassword = mySharedPreferences.getString("Password", "")
         if (!TextUtils.isEmpty(userEmail) && !TextUtils.isEmpty(userPassword)) {
             EditTextBindingAdapter(bindingSignIn.textInputEmail, userEmail!!)
-            bindingSignIn.textInputPassword.setText(userPassword)
+            EditTextBindingAdapter(bindingSignIn.textInputPassword, userPassword!!)
         }
     }
 
     object LoadSavedCredential {
         @JvmStatic @BindingAdapter("android:text")
-        fun EditTextBindingAdapter(view: TextInputEditText, email: String?) {
-            if (email == null)
+        fun EditTextBindingAdapter(view: TextInputEditText, value: String?) {
+            if (value == null)
                 return
-            view.setText(email)
+            view.setText(value)
         }
     }
 
