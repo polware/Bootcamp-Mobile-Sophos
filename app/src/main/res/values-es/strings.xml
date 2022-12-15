@@ -24,6 +24,7 @@
     <string name="image_send_description">Imagen del documento</string>
     <string name="text_type_document">Tipo de documento:</string>
     <string name="text_city">Ciudad:</string>
+    <string name="text_file_type">Tipo de adjunto</string>
     <string name="text_document_number">Número de documento</string>
     <string name="text_user_names">Nombre(s)</string>
     <string name="text_user_lastname">Apellido(s)</string>
@@ -44,4 +45,5 @@
     <string name="button_send_document">Enviar</string>
     <string name="message_invalid_emailpassword">El email o la contraseña es inválida</string>
     <string name="message_alert_empty_fields">Por favor complete todos los campos</string>
+    <string name="message_saved_document">Documento guardado en API</string>
 </resources>

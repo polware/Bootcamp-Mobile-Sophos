@@ -97,10 +97,14 @@ open class MainActivity : AppCompatActivity() {
         if (getAppLanguage == "en_US" || getAppLanguage == "en"){
             item.title = resources.getString(R.string.menu_language_spanish)
             inactiveLanguage = "es"
+            // Change Corporate Image
+            bindingMain.imageViewMain.setImageResource(R.drawable.english_welcome_sophos)
         }
         else {
             item.title = resources.getString(R.string.menu_language_english)
             inactiveLanguage = "en"
+            // Change Corporate Image
+            bindingMain.imageViewMain.setImageResource(R.drawable.welcome_sophos)
         }
     }
 

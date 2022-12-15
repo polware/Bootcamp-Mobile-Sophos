@@ -34,7 +34,7 @@ class AdapterViewDocument(private val documentListener: (image: String) -> Unit)
         val documentImage = documents[position].fileType
         val dateFormat = (documents[position].date).split("T").toTypedArray()
         holder.documentDate.text = dateFormat[0]
-        holder.documentType.text = documents[position].docType
+        holder.documentType.text = documents[position].fileType
         val stringBuilder = StringBuilder().append("${documents[position].name} ")
             .append(documents[position].lastName).toString()
         holder.completeName.text = stringBuilder

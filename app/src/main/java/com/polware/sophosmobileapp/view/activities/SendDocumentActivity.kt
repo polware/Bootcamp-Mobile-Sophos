@@ -275,7 +275,7 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
                 val city = bindingSendDoc.spinnerCity.selectedItem.toString()
                 val email = bindingSendDoc.editTextEmailAddress.text.toString()
                 val attachedImage = encodedImage
-                val fileType = "Image"
+                val fileType = bindingSendDoc.editTextFileType.text.toString()
                 val newDocument = NewDocument(documentType, id, name, lastName, city,
                     email, attachedImage!!, fileType)
                 viewModel = ViewModelProvider(this,
@@ -287,7 +287,7 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
                         viewModel.status.value = null
                         Toast.makeText(
                             this@SendDocumentActivity,
-                            "Document added to API", Toast.LENGTH_LONG
+                            resources.getString(R.string.message_saved_document), Toast.LENGTH_LONG
                         ).show()
                         finish()
                     }
