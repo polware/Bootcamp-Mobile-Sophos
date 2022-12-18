@@ -31,6 +31,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDeepLinkBuilder
 import com.fondesa.kpermissions.PermissionStatus
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.anyPermanentlyDenied
@@ -38,16 +39,17 @@ import com.fondesa.kpermissions.anyShouldShowRationale
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.request.PermissionRequest
 import com.polware.sophosmobileapp.R
-import com.polware.sophosmobileapp.data.Constants.THEME_PREFERENCES
 import com.polware.sophosmobileapp.data.Constants.CURRENT_THEME
-import com.polware.sophosmobileapp.data.models.*
+import com.polware.sophosmobileapp.data.Constants.THEME_PREFERENCES
+import com.polware.sophosmobileapp.data.models.NewDocument
 import com.polware.sophosmobileapp.data.models.enums.Cities
 import com.polware.sophosmobileapp.data.models.enums.DocumentType
 import com.polware.sophosmobileapp.databinding.ActivitySendDocumentBinding
 import com.polware.sophosmobileapp.view.activities.MainActivity.Companion.currentLanguage
 import com.polware.sophosmobileapp.viewmodels.SendDocViewModelFactory
 import com.polware.sophosmobileapp.viewmodels.SendDocumentViewModel
-import java.io.*
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.util.*
 
 class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
@@ -137,11 +139,11 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.action_nav_send_viewdoc -> {
-                MainActivity().goToMain()
+                navigateToViewDocuments()
                 true
             }
             R.id.action_nav_send_offices -> {
-                MainActivity().goToMain()
+                navigateToOffices()
                 true
             }
             R.id.action_mode_theme -> {
@@ -369,6 +371,24 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun navigateToViewDocuments() {
+        val pendingIntent = NavDeepLinkBuilder(applicationContext)
+            .setGraph(R.navigation.my_navigation)
+            .setDestination(R.id.viewDocumentsFragment)
+            .setComponentName(MainActivity::class.java)
+            .createPendingIntent()
+        pendingIntent.send()
+    }
+
+    private fun navigateToOffices() {
+        val pendingIntent = NavDeepLinkBuilder(applicationContext)
+            .setGraph(R.navigation.my_navigation)
+            .setDestination(R.id.officesMapFragment)
+            .setComponentName(MainActivity::class.java)
+            .createPendingIntent()
+        pendingIntent.send()
     }
 
 }

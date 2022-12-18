@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.databinding.ActivityMainBinding
@@ -25,11 +23,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         currentLanguage = resources.configuration.locale.toString()
-    }
-
-    fun goToMain() {
-        Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.officesMapFragment)
-        //Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.viewDocumentsFragment)
     }
 
 }
