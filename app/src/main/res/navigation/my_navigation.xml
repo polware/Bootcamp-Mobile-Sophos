@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_navigation"
+    app:startDestination="@id/mainContentFragment">
+
+    <fragment
+        android:id="@+id/mainContentFragment"
+        android:name="com.polware.sophosmobileapp.view.fragments.MainContentFragment"
+        android:label="MainContentFragment" >
+        <action
+            android:id="@+id/action_mainContentFragment_to_viewDocumentsFragment"
+            app:destination="@id/viewDocumentsFragment" />
+        <action
+            android:id="@+id/action_mainContentFragment_to_sendDocumentActivity"
+            app:destination="@id/sendDocumentActivity" />
+        <action
+            android:id="@+id/action_mainContentFragment_to_officesMapFragment"
+            app:destination="@id/officesMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewDocumentsFragment"
+        android:name="com.polware.sophosmobileapp.view.fragments.ViewDocumentsFragment"
+        android:label="ViewDocumentsFragment" >
+        <action
+            android:id="@+id/action_viewDocumentsFragment_to_officesMapFragment"
+            app:destination="@id/officesMapFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/sendDocumentActivity"
+        android:name="com.polware.sophosmobileapp.view.activities.SendDocumentActivity"
+        android:label="SendDocumentActivity" />
+    <fragment
+        android:id="@+id/officesMapFragment"
+        android:name="com.polware.sophosmobileapp.view.fragments.OfficesMapFragment"
+        android:label="OfficesMapFragment" >
+        <action
+            android:id="@+id/action_officesMapFragment_to_viewDocumentsFragment"
+            app:destination="@id/viewDocumentsFragment" />
+    </fragment>
+</navigation>

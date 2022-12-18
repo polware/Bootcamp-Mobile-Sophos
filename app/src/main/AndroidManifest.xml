@@ -21,16 +21,6 @@
         android:theme="@style/Theme.SophosMobileApp"
         tools:targetApi="31">
         <activity
-            android:name="com.polware.sophosmobileapp.view.activities.OfficesMapActivity"
-            android:exported="false"
-            android:parentActivityName="com.polware.sophosmobileapp.view.activities.MainActivity"
-            android:theme="@style/NoActionBarTheme" />
-        <activity
-            android:name="com.polware.sophosmobileapp.view.activities.ViewDocumentActivity"
-            android:exported="false"
-            android:parentActivityName="com.polware.sophosmobileapp.view.activities.MainActivity"
-            android:theme="@style/NoActionBarTheme" />
-        <activity
             android:name="com.polware.sophosmobileapp.view.activities.SendDocumentActivity"
             android:exported="false"
             android:parentActivityName="com.polware.sophosmobileapp.view.activities.MainActivity"

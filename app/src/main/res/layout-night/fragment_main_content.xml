@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activities.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/MyToolbarTheme"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewMain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewMain"
+            android:layout_width="match_parent"
+            android:layout_height="262dp"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="@string/welcome_sophos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarMain"
+            app:srcCompat="@drawable/welcome_sophos" />
+
+        <View
+            android:id="@+id/viewSend"
+            android:layout_width="340dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/dark_border_view_send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewMain" />
+
+        <ImageView
+            android:id="@+id/imageViewSend"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/descr_corporate_image"
+            app:layout_constraintStart_toStartOf="@+id/viewSend"
+            app:layout_constraintTop_toTopOf="@+id/viewSend"
+            app:srcCompat="@drawable/dark_ic_send_docs" />
+
+        <TextView
+            android:id="@+id/textViewTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/send_documents"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewSend"
+            app:layout_constraintStart_toEndOf="@+id/imageViewSend"
+            app:layout_constraintTop_toTopOf="@+id/imageViewSend" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSend"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/dark_main_senddoc_button_effect"
+            android:text="@string/button_main"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            app:icon="@drawable/dark_ic_arrow"
+            app:iconGravity="textEnd"
+            app:iconTint="@null"
+            app:layout_constraintEnd_toEndOf="@+id/viewSend"
+            app:layout_constraintStart_toStartOf="@+id/viewSend"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle1" />
+
+        <View
+            android:id="@+id/viewViewDoc"
+            android:layout_width="340dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/dark_border_view_viewdocs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewSend" />
+
+        <ImageView
+            android:id="@+id/imageViewDocument"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/viewViewDoc"
+            app:layout_constraintTop_toTopOf="@+id/viewViewDoc"
+            app:srcCompat="@drawable/dark_ic_view_document" />
+
+        <TextView
+            android:id="@+id/textViewTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/view_documents"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewDocument"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDocument"
+            app:layout_constraintTop_toTopOf="@+id/imageViewDocument" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonViewDoc"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/dark_view_doc_button_effect"
+            android:text="@string/button_main"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            app:icon="@drawable/dark_ic_arrow"
+            app:iconGravity="textEnd"
+            app:iconTint="@null"
+            app:layout_constraintEnd_toEndOf="@+id/viewViewDoc"
+            app:layout_constraintStart_toStartOf="@+id/viewViewDoc"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle2" />
+
+        <View
+            android:id="@+id/viewOffice"
+            android:layout_width="340dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/dark_border_view_offices"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewViewDoc" />
+
+        <ImageView
+            android:id="@+id/imageViewOffice"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="@+id/viewOffice"
+            app:layout_constraintTop_toTopOf="@+id/viewOffice"
+            app:srcCompat="@drawable/dark_ic_location_office" />
+
+        <TextView
+            android:id="@+id/textViewTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/offices"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewOffice"
+            app:layout_constraintStart_toEndOf="@+id/imageViewOffice"
+            app:layout_constraintTop_toTopOf="@+id/imageViewOffice" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonOffices"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/dark_offices_button_effect"
+            android:text="@string/button_main"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            app:icon="@drawable/dark_ic_arrow"
+            app:iconGravity="textEnd"
+            app:iconTint="@null"
+            app:layout_constraintEnd_toEndOf="@+id/viewOffice"
+            app:layout_constraintStart_toStartOf="@+id/viewOffice"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

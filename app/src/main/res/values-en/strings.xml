@@ -14,8 +14,7 @@
     <string name="offices">Offices</string>
     <string name="menu_light_theme">Dark theme</string>
     <string name="menu_dark_theme">Light theme</string>
-    <string name="menu_language_english">English language</string>
-    <string name="menu_language_spanish">Spanish language</string>
+    <string name="menu_language">Spanish language</string>
     <string name="menu_sign_out">Sign out</string>
     <string name="toolbar_title">Back</string>
     <string name="send_document_title">Sending documentation</string>
@@ -46,4 +45,5 @@
     <string name="message_invalid_emailpassword">Email or password is invalid</string>
     <string name="message_alert_empty_fields">Please fill all fields</string>
     <string name="message_saved_document">Document added to API</string>
+    <string name="descr_corporate_image">Corporate image</string>
 </resources>

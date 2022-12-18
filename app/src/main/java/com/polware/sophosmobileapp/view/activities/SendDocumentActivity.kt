@@ -1,12 +1,16 @@
 package com.polware.sophosmobileapp.view.activities
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -16,13 +20,14 @@ import android.provider.Settings
 import android.util.Base64
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -39,11 +44,13 @@ import com.polware.sophosmobileapp.data.models.*
 import com.polware.sophosmobileapp.data.models.enums.Cities
 import com.polware.sophosmobileapp.data.models.enums.DocumentType
 import com.polware.sophosmobileapp.databinding.ActivitySendDocumentBinding
+import com.polware.sophosmobileapp.view.activities.MainActivity.Companion.currentLanguage
 import com.polware.sophosmobileapp.viewmodels.SendDocViewModelFactory
 import com.polware.sophosmobileapp.viewmodels.SendDocumentViewModel
 import java.io.*
+import java.util.*
 
-class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
+class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
     private lateinit var bindingSendDoc: ActivitySendDocumentBinding
     private lateinit var mySharedPreferences: SharedPreferences
     private var activityResultLauncherImageSelected: ActivityResultLauncher<Intent>? = null
@@ -91,6 +98,10 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
             validateFormAndSave()
         }
 
+        bindingSendDoc.toolbarSendDocs.setNavigationOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
     }
 
     private fun setupSpinnersView(){
@@ -118,24 +129,19 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_main,menu)
-        setPopupLanguage(menu)
+        // Inflate the menu; this adds items to the action bar if it is present
+        menuInflater.inflate(R.menu.menu_send_doc, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
-            R.id.action_send_document -> {
-                startActivity(Intent(this, SendDocumentActivity::class.java))
+            R.id.action_nav_send_viewdoc -> {
+                MainActivity().goToMain()
                 true
             }
-            R.id.action_view_document -> {
-                startActivity(Intent(this, ViewDocumentActivity::class.java))
-                true
-            }
-            R.id.action_office_map -> {
-                startActivity(Intent(this, OfficesMapActivity::class.java))
+            R.id.action_nav_send_offices -> {
+                MainActivity().goToMain()
                 true
             }
             R.id.action_mode_theme -> {
@@ -143,7 +149,7 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
                 true
             }
             R.id.action_language -> {
-                changeLanguage(this, inactiveLanguage)
+                changeLanguage(this, currentLanguage)
                 true
             }
             R.id.action_sign_out -> {
@@ -294,6 +300,46 @@ class SendDocumentActivity : MainActivity(), PermissionRequest.Listener {
                 }
             }
         }
+    }
+
+    private fun changeAppTheme() {
+        mySharedPreferences = getSharedPreferences(THEME_PREFERENCES, Context.MODE_PRIVATE)
+        val editor = mySharedPreferences.edit()
+        val themeState = mySharedPreferences.getString(CURRENT_THEME, "")
+        if (themeState.equals("dark_mode")) {
+            // If dark mode is ON, it will turn off
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            editor.putString(CURRENT_THEME, "light_mode")
+            editor.apply()
+        }
+        else {
+            // If dark mode is OFF, it will turn on
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            editor.putString(CURRENT_THEME, "dark_mode")
+            editor.apply()
+        }
+    }
+
+    private fun changeLanguage(activity: Activity, languageCode: String) {
+        val newLanguage = if (languageCode == "en" || languageCode == "en_US") {
+            "es"
+        } else {
+            "en"
+        }
+        val locale = Locale(newLanguage)
+        Locale.setDefault(locale)
+        val resources: Resources = activity.resources
+        val config: Configuration = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+        val refresh = Intent(this, activity::class.java)
+        refresh.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(refresh)
+    }
+
+    private fun signOut() {
+        startActivity(Intent(this, SignInActivity::class.java))
+        finish()
     }
 
     override fun onPermissionsResult(result: List<PermissionStatus>) {
