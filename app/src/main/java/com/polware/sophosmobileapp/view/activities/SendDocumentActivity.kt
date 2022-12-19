@@ -101,7 +101,7 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
         }
 
         bindingSendDoc.toolbarSendDocs.setNavigationOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            navigateToFragment(R.id.mainContentFragment)
         }
 
     }
@@ -139,11 +139,11 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.action_nav_send_viewdoc -> {
-                navigateToViewDocuments()
+                navigateToFragment(R.id.viewDocumentsFragment)
                 true
             }
             R.id.action_nav_send_offices -> {
-                navigateToOffices()
+                navigateToFragment(R.id.officesMapFragment)
                 true
             }
             R.id.action_mode_theme -> {
@@ -373,19 +373,10 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
             .show()
     }
 
-    private fun navigateToViewDocuments() {
+    private fun navigateToFragment(fragmentId: Int) {
         val pendingIntent = NavDeepLinkBuilder(applicationContext)
             .setGraph(R.navigation.my_navigation)
-            .setDestination(R.id.viewDocumentsFragment)
-            .setComponentName(MainActivity::class.java)
-            .createPendingIntent()
-        pendingIntent.send()
-    }
-
-    private fun navigateToOffices() {
-        val pendingIntent = NavDeepLinkBuilder(applicationContext)
-            .setGraph(R.navigation.my_navigation)
-            .setDestination(R.id.officesMapFragment)
+            .setDestination(fragmentId)
             .setComponentName(MainActivity::class.java)
             .createPendingIntent()
         pendingIntent.send()
