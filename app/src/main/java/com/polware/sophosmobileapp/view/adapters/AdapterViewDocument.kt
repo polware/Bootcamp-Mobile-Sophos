@@ -19,12 +19,11 @@ class AdapterViewDocument(private val documentListener: (image: String) -> Unit)
     // Binding del layout "item_document"
     class ViewHolder(bindingAdapter: ItemDocumentBinding):
         RecyclerView.ViewHolder(bindingAdapter.root) {
-        val documentDetails = bindingAdapter.linearLayoutDocDetails
         private val documentDate = bindingAdapter.textViewDate
         private val documentType = bindingAdapter.textViewDocument
         private val completeName = bindingAdapter.textViewCompleteName
 
-        fun bind(document: DocumentItems) {
+        fun bind(document: DocumentItems, documentListener: (image: String) -> Unit) {
             val dateFormat = (document.date).split("T").toTypedArray()
             documentDate.text = dateFormat[0]
             //documentType.text = document.fileType
@@ -32,6 +31,10 @@ class AdapterViewDocument(private val documentListener: (image: String) -> Unit)
             val stringBuilder = StringBuilder().append("${document.name} ")
                 .append(document.lastName).toString()
             completeName.text = stringBuilder
+            val documentImage = document.fileType
+            itemView.setOnClickListener {
+                documentListener.invoke(documentImage)
+            }
         }
     }
 
@@ -41,11 +44,7 @@ class AdapterViewDocument(private val documentListener: (image: String) -> Unit)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(documentItem[position])
-        val documentImage = documentItem[position].fileType
-        holder.documentDetails.setOnClickListener {
-            documentListener.invoke(documentImage)
-        }
+        holder.bind(documentItem[position], documentListener)
     }
 
     override fun getItemCount(): Int {
