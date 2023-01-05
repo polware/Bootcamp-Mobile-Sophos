@@ -10,13 +10,25 @@
         android:label="MainContentFragment" >
         <action
             android:id="@+id/action_mainContentFragment_to_viewDocumentsFragment"
-            app:destination="@id/viewDocumentsFragment" />
+            app:destination="@id/viewDocumentsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainContentFragment_to_sendDocumentActivity"
-            app:destination="@id/sendDocumentActivity" />
+            app:destination="@id/sendDocumentActivity"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainContentFragment_to_officesMapFragment"
-            app:destination="@id/officesMapFragment" />
+            app:destination="@id/officesMapFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/viewDocumentsFragment"
@@ -24,7 +36,18 @@
         android:label="ViewDocumentsFragment" >
         <action
             android:id="@+id/action_viewDocumentsFragment_to_officesMapFragment"
-            app:destination="@id/officesMapFragment" />
+            app:destination="@id/officesMapFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_viewDocumentsFragment_to_mainContentFragment"
+            app:destination="@id/mainContentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <activity
         android:id="@+id/sendDocumentActivity"
@@ -36,6 +59,17 @@
         android:label="OfficesMapFragment" >
         <action
             android:id="@+id/action_officesMapFragment_to_viewDocumentsFragment"
-            app:destination="@id/viewDocumentsFragment" />
+            app:destination="@id/viewDocumentsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_officesMapFragment_to_mainContentFragment"
+            app:destination="@id/mainContentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

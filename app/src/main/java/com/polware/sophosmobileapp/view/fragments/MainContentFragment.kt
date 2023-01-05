@@ -78,8 +78,7 @@ open class MainContentFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId){
                     R.id.action_send_document -> {
-                        val intent = Intent(activity, SendDocumentActivity::class.java)
-                        activity?.startActivity(intent)
+                        startActivity(Intent(requireActivity(), SendDocumentActivity::class.java))
                         true
                     }
                     R.id.action_view_document -> {

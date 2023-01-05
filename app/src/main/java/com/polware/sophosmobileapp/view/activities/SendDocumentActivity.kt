@@ -341,6 +341,7 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
 
     private fun signOut() {
         startActivity(Intent(this, SignInActivity::class.java))
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         finish()
     }
 
@@ -380,6 +381,7 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
             .setComponentName(MainActivity::class.java)
             .createPendingIntent()
         pendingIntent.send()
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
 }

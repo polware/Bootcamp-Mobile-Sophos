@@ -29,7 +29,8 @@ class ViewDocumentsFragment : MainContentFragment() {
     private lateinit var adapterDocument : AdapterViewDocument
     private lateinit var navController: NavController
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         _bindingVD = FragmentViewDocumentsBinding.inflate(inflater, container, false)
         return bindingViewDocuments.root
@@ -54,7 +55,7 @@ class ViewDocumentsFragment : MainContentFragment() {
 
         bindingViewDocuments.toolbarViewDocs.setNavigationOnClickListener {
             //navController.navigateUp()
-            navController.navigate(R.id.mainContentFragment)
+            navController.navigate(R.id.action_viewDocumentsFragment_to_mainContentFragment)
         }
 
     }
@@ -63,7 +64,6 @@ class ViewDocumentsFragment : MainContentFragment() {
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
                 menu.clear()
                 menuInflater.inflate(R.menu.menu_view_doc, menu)
             }
@@ -71,8 +71,8 @@ class ViewDocumentsFragment : MainContentFragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId){
                     R.id.action_nav_view_senddoc -> {
-                        val intent = Intent(activity, SendDocumentActivity::class.java)
-                        activity?.startActivity(intent)
+                        startActivity(Intent(requireActivity(), SendDocumentActivity::class.java))
+                        requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         true
                     }
                     R.id.action_nav_view_offices -> {

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -44,7 +45,8 @@ class OfficesMapFragment : MainContentFragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private var mapView: MapView? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         _bindingOM = FragmentOfficesMapBinding.inflate(inflater, container, false)
         return bindingOfficesMap.root
@@ -61,7 +63,7 @@ class OfficesMapFragment : MainContentFragment(), OnMapReadyCallback {
         setupFragmentMenu()
 
         bindingOfficesMap.toolbarMap.setNavigationOnClickListener {
-            navController.navigate(R.id.mainContentFragment)
+            navController.navigate(R.id.action_officesMapFragment_to_mainContentFragment)
         }
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -94,7 +96,6 @@ class OfficesMapFragment : MainContentFragment(), OnMapReadyCallback {
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
                 menu.clear()
                 menuInflater.inflate(R.menu.menu_offices, menu)
             }
@@ -102,8 +103,8 @@ class OfficesMapFragment : MainContentFragment(), OnMapReadyCallback {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId){
                     R.id.action_nav_off_senddoc -> {
-                        val intent = Intent(activity, SendDocumentActivity::class.java)
-                        activity?.startActivity(intent)
+                        startActivity(Intent(requireActivity(), SendDocumentActivity::class.java))
+                        requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         true
                     }
                     R.id.action_nav_off_viewdoc -> {
