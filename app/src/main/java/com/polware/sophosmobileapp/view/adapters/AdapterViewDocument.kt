@@ -9,10 +9,10 @@ import com.polware.sophosmobileapp.databinding.ItemDocumentBinding
 class AdapterViewDocument(private val documentListener: (image: String) -> Unit):
     RecyclerView.Adapter<AdapterViewDocument.ViewHolder>() {
 
-    private var documents = ArrayList<DocumentItems>()
+    private var documentItem = ArrayList<DocumentItems>()
 
     fun setDocumentList(documentList : List<DocumentItems>){
-        this.documents = documentList as ArrayList<DocumentItems>
+        this.documentItem = documentList as ArrayList<DocumentItems>
         notifyDataSetChanged()
     }
 
@@ -20,9 +20,19 @@ class AdapterViewDocument(private val documentListener: (image: String) -> Unit)
     class ViewHolder(bindingAdapter: ItemDocumentBinding):
         RecyclerView.ViewHolder(bindingAdapter.root) {
         val documentDetails = bindingAdapter.linearLayoutDocDetails
-        val documentDate = bindingAdapter.textViewDate
-        val documentType = bindingAdapter.textViewDocument
-        val completeName = bindingAdapter.textViewCompleteName
+        private val documentDate = bindingAdapter.textViewDate
+        private val documentType = bindingAdapter.textViewDocument
+        private val completeName = bindingAdapter.textViewCompleteName
+
+        fun bind(document: DocumentItems) {
+            val dateFormat = (document.date).split("T").toTypedArray()
+            documentDate.text = dateFormat[0]
+            //documentType.text = document.fileType
+            documentType.text = document.attachedFile
+            val stringBuilder = StringBuilder().append("${document.name} ")
+                .append(document.lastName).toString()
+            completeName.text = stringBuilder
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,21 +41,15 @@ class AdapterViewDocument(private val documentListener: (image: String) -> Unit)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val documentImage = documents[position].fileType
-        val dateFormat = (documents[position].date).split("T").toTypedArray()
-        holder.documentDate.text = dateFormat[0]
-        holder.documentType.text = documents[position].fileType
-        val stringBuilder = StringBuilder().append("${documents[position].name} ")
-            .append(documents[position].lastName).toString()
-        holder.completeName.text = stringBuilder
-
+        holder.bind(documentItem[position])
+        val documentImage = documentItem[position].fileType
         holder.documentDetails.setOnClickListener {
             documentListener.invoke(documentImage)
         }
     }
 
     override fun getItemCount(): Int {
-        return documents.size
+        return documentItem.size
     }
 
 }

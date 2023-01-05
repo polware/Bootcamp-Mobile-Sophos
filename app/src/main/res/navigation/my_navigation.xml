@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_navigation"
     app:startDestination="@id/mainContentFragment">
 
     <fragment
         android:id="@+id/mainContentFragment"
         android:name="com.polware.sophosmobileapp.view.fragments.MainContentFragment"
-        android:label="MainContentFragment" >
+        android:label="MainContentFragment"
+        tools:layout="@layout/fragment_main_content">
         <action
             android:id="@+id/action_mainContentFragment_to_viewDocumentsFragment"
             app:destination="@id/viewDocumentsFragment"
@@ -33,7 +35,8 @@
     <fragment
         android:id="@+id/viewDocumentsFragment"
         android:name="com.polware.sophosmobileapp.view.fragments.ViewDocumentsFragment"
-        android:label="ViewDocumentsFragment" >
+        android:label="ViewDocumentsFragment"
+        tools:layout="@layout/fragment_view_documents">
         <action
             android:id="@+id/action_viewDocumentsFragment_to_officesMapFragment"
             app:destination="@id/officesMapFragment"
@@ -52,11 +55,13 @@
     <activity
         android:id="@+id/sendDocumentActivity"
         android:name="com.polware.sophosmobileapp.view.activities.SendDocumentActivity"
-        android:label="SendDocumentActivity" />
+        android:label="SendDocumentActivity"
+        tools:layout="@layout/activity_send_document" />
     <fragment
         android:id="@+id/officesMapFragment"
         android:name="com.polware.sophosmobileapp.view.fragments.OfficesMapFragment"
-        android:label="OfficesMapFragment" >
+        android:label="OfficesMapFragment"
+        tools:layout="@layout/fragment_offices_map">
         <action
             android:id="@+id/action_officesMapFragment_to_viewDocumentsFragment"
             app:destination="@id/viewDocumentsFragment"

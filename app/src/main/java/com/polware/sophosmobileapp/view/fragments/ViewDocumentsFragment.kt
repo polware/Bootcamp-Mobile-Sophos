@@ -116,6 +116,7 @@ class ViewDocumentsFragment : MainContentFragment() {
             bindingViewDocuments.imageViewDocImage.setImageBitmap(decodedImage)
         } catch (e: IllegalArgumentException) {
             Toast.makeText(context, "Invalid Base-64 format", Toast.LENGTH_SHORT).show()
+            bindingViewDocuments.imageViewDocImage.setImageResource(R.drawable.unavailable_image)
             Log.e("Base64Decode", e.message.toString())
         }
     }
