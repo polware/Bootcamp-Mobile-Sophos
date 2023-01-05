@@ -49,8 +49,15 @@ class ViewDocumentsFragment : MainContentFragment() {
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[DocumentViewModel::class.java]
         viewModel.getDocumentList()
-        viewModel.observeDocumentLiveData().observe(viewLifecycleOwner) { documents ->
-            adapterDocument.setDocumentList(documents)
+        viewModel.observeDocumentLiveData().observe(viewLifecycleOwner) {
+            documents ->
+            if (documents != null) {
+                adapterDocument.setDocumentList(documents)
+            }
+            else {
+                Toast.makeText(requireActivity(),
+                    resources.getString(R.string.error_message_documents_viewmodel), Toast.LENGTH_SHORT).show()
+            }
         }
 
         bindingViewDocuments.toolbarViewDocs.setNavigationOnClickListener {

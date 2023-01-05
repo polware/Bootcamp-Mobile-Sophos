@@ -46,4 +46,6 @@
     <string name="message_alert_empty_fields">Por favor complete todos los campos</string>
     <string name="message_saved_document">Documento guardado en API</string>
     <string name="descr_corporate_image">Imagen corporativa</string>
+    <string name="error_message_documents_viewmodel">Error al obtener los documentos</string>
+    <string name="error_message_officesmap_viewmodel">Error de petición en la conexión</string>
 </resources>

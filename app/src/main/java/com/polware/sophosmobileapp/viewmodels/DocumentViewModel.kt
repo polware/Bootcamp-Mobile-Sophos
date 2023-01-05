@@ -8,27 +8,25 @@ import com.polware.sophosmobileapp.data.Constants.API_KEY
 import com.polware.sophosmobileapp.data.Constants.EMAIL
 import com.polware.sophosmobileapp.data.api.RetrofitBuilder
 import com.polware.sophosmobileapp.data.models.DocumentItems
-import com.polware.sophosmobileapp.data.models.DocumentModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class DocumentViewModel: ViewModel() {
     private var documentLiveData = MutableLiveData<List<DocumentItems>>()
 
     fun getDocumentList() {
-        RetrofitBuilder.api.getAllDocuments(API_KEY, EMAIL).enqueue(object :
-            Callback<DocumentModel> {
-            override fun onResponse(call: Call<DocumentModel>, response: Response<DocumentModel>) {
-                if (response.isSuccessful){
-                    documentLiveData.value = response.body()!!.documentItems
-                }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitBuilder.api.getAllDocuments(API_KEY, EMAIL)
+                Log.i("DocumentViewModel", response.body().toString())
+                documentLiveData.postValue(response.body()!!.documentItems)
             }
-
-            override fun onFailure(call: Call<DocumentModel>, t: Throwable) {
-                Log.e("ErrorGettingDocuments: ", t.message.toString())
+            catch (e: HttpException) {
+                Log.e("HttpException: ", "${e.message}")
             }
-        })
+        }
     }
 
     fun observeDocumentLiveData(): LiveData<List<DocumentItems>> {

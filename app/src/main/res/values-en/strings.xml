@@ -46,4 +46,6 @@
     <string name="message_alert_empty_fields">Please fill all fields</string>
     <string name="message_saved_document">Document added to API</string>
     <string name="descr_corporate_image">Corporate image</string>
+    <string name="error_message_documents_viewmodel">Error getting documents!</string>
+    <string name="error_message_officesmap_viewmodel">Network error!</string>
 </resources>

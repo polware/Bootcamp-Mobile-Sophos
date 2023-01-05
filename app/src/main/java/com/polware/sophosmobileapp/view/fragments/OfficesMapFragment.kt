@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -161,24 +160,30 @@ class OfficesMapFragment : MainContentFragment(), OnMapReadyCallback {
 
     private fun showOffices() {
         viewModel.observeOfficesList().observe(this) {
-                officesList ->
-            for (index in officesList.CityItems.indices){
-                val latitude = officesList.CityItems[index].latitude.toDouble()
-                val longitude = officesList.CityItems[index].longitude.toDouble()
-                val office = LatLng(latitude, longitude)
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(office, 12f))
-                mMap.animateCamera(CameraUpdateFactory.zoomIn())
-                val camera = CameraPosition.Builder()
-                    .target(office)
-                    .zoom(12f)
-                    .tilt(30f)
-                    .build()
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camera))
-                val bitmapIcon = BitmapFactory.decodeResource(resources, R.mipmap.icon_location)
-                mMap.addMarker(
-                    MarkerOptions().position(office).title("Sede ${officesList.CityItems[index].city}")
-                        .snippet(officesList.CityItems[index].name).draggable(true)
-                        .icon(BitmapDescriptorFactory.fromBitmap(bitmapIcon)))
+            officesList ->
+            if (officesList != null) {
+                for (index in officesList.CityItems.indices){
+                    val latitude = officesList.CityItems[index].latitude.toDouble()
+                    val longitude = officesList.CityItems[index].longitude.toDouble()
+                    val office = LatLng(latitude, longitude)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(office, 12f))
+                    mMap.animateCamera(CameraUpdateFactory.zoomIn())
+                    val camera = CameraPosition.Builder()
+                        .target(office)
+                        .zoom(12f)
+                        .tilt(30f)
+                        .build()
+                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camera))
+                    val bitmapIcon = BitmapFactory.decodeResource(resources, R.mipmap.icon_location)
+                    mMap.addMarker(
+                        MarkerOptions().position(office).title("Sede ${officesList.CityItems[index].city}")
+                            .snippet(officesList.CityItems[index].name).draggable(true)
+                            .icon(BitmapDescriptorFactory.fromBitmap(bitmapIcon)))
+                }
+            }
+            else {
+                Toast.makeText(requireActivity(),
+                    resources.getString(R.string.error_message_officesmap_viewmodel), Toast.LENGTH_SHORT).show()
             }
         }
     }
