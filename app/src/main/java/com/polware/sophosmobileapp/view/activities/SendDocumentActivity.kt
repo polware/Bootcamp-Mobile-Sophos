@@ -41,7 +41,6 @@ import com.fondesa.kpermissions.request.PermissionRequest
 import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.data.Constants.CURRENT_THEME
 import com.polware.sophosmobileapp.data.Constants.THEME_PREFERENCES
-import com.polware.sophosmobileapp.data.models.NewDocument
 import com.polware.sophosmobileapp.data.models.enums.Cities
 import com.polware.sophosmobileapp.data.models.enums.DocumentType
 import com.polware.sophosmobileapp.databinding.ActivitySendDocumentBinding
@@ -114,13 +113,17 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
             }
         }
 
-        viewModel.status.observe(this) { status ->
-            status?.let {
-                // Reset status value first to prevent multi triggering and to be available to trigger action again
-                viewModel.status.value = null
-                Toast.makeText(this, resources.getString(R.string.message_saved_document), Toast.LENGTH_LONG).show()
-                finish()
-            }
+        viewModel.status.observe(this) {
+                status ->
+                Log.i("StatusReceived: ", status.toString())
+                if (status == true) {
+                    Toast.makeText(this, resources.getString(R.string.message_saved_document), Toast.LENGTH_LONG).show()
+                    finish()
+                }
+                else {
+                    Toast.makeText(this, resources.getString(R.string.message_error_send_document), Toast.LENGTH_LONG).show()
+                    finish()
+                }
         }
 
         bindingSendDoc.toolbarSendDocs.setNavigationOnClickListener {

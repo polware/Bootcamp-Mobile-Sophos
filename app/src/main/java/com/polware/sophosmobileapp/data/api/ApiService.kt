@@ -17,8 +17,8 @@ interface ApiService {
     suspend fun getAllDocuments(@Query("appid") app_id: String, @Query("correo") email: String): Response<DocumentModel>
 
     @POST("RS_Documentos")
-    fun createDocument(@Query("appid") app_id: String,
-                       @Body dataDocument: NewDocument): Call<DocumentItems>
+    suspend fun sendDocument(@Query("appid") app_id: String,
+                     @Body dataDocument: NewDocument): Response<DocumentItems>
 
     @GET("RS_Oficinas")
     suspend fun getAllOffices(): Response<OfficesModel>

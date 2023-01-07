@@ -4,13 +4,16 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.polware.sophosmobileapp.data.models.NewDocument
 import com.polware.sophosmobileapp.view.activities.SendDocumentActivity.Companion.encodedImageB64
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SendDocumentViewModel(private val sendDocumentRepository: SendDocumentRepository): ViewModel() {
-    var status = MutableLiveData<Boolean>()
     val inputId = MutableLiveData<String>()
     val inputDocument = MutableLiveData<String>()
     val inputName = MutableLiveData<String>()
@@ -21,6 +24,12 @@ class SendDocumentViewModel(private val sendDocumentRepository: SendDocumentRepo
     val inputFileType = MutableLiveData<String>()
     private val statusMessage = MutableLiveData<Event<String>>()
     val message: LiveData<Event<String>> get() = statusMessage
+
+    val status: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        addSource(sendDocumentRepository.sendStatus) { flag ->
+            value = flag
+        }
+    }
 
     val documentListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -71,9 +80,10 @@ class SendDocumentViewModel(private val sendDocumentRepository: SendDocumentRepo
             val email = inputEmail.value
             val attachedImage = inputImage.value
             val fileType = inputFileType.value
-            sendDocumentRepository.saveNewDocument(NewDocument(documentType!!, id!!, name!!,
-                lastName!!, city!!, email!!, attachedImage!!, fileType!!))
-            status.value = sendDocumentRepository.validateResponse()
+            CoroutineScope(Dispatchers.IO).launch {
+                sendDocumentRepository.saveNewDocument(NewDocument(documentType!!, id!!, name!!,
+                    lastName!!, city!!, email!!, attachedImage!!, fileType!!))
+            }
         }
     }
 

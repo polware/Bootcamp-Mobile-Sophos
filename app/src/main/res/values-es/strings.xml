@@ -44,7 +44,8 @@
     <string name="button_send_document">Enviar</string>
     <string name="message_invalid_emailpassword">El email o la contraseña es inválida</string>
     <string name="message_alert_empty_fields">Por favor complete todos los campos</string>
-    <string name="message_saved_document">Documento guardado en API</string>
+    <string name="message_saved_document">Documento guardado en API service</string>
+    <string name="message_error_send_document">Error de conexión con la red o el servidor</string>
     <string name="descr_corporate_image">Imagen corporativa</string>
     <string name="error_message_documents_viewmodel">Error al obtener los documentos</string>
     <string name="error_message_officesmap_viewmodel">Error de petición en la conexión</string>

@@ -44,6 +44,7 @@
     <string name="message_invalid_emailpassword">Email or password is invalid</string>
     <string name="message_alert_empty_fields">Please fill all fields</string>
     <string name="message_saved_document">Document added to API</string>
+    <string name="message_error_send_document">Network or server connection error</string>
     <string name="descr_corporate_image">Corporate image</string>
     <string name="error_message_documents_viewmodel">Error getting documents!</string>
     <string name="error_message_officesmap_viewmodel">Network error!</string>
