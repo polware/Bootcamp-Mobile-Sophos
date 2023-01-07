@@ -47,6 +47,7 @@ import com.polware.sophosmobileapp.data.models.enums.DocumentType
 import com.polware.sophosmobileapp.databinding.ActivitySendDocumentBinding
 import com.polware.sophosmobileapp.view.activities.MainActivity.Companion.currentLanguage
 import com.polware.sophosmobileapp.viewmodels.SendDocViewModelFactory
+import com.polware.sophosmobileapp.viewmodels.SendDocumentRepository
 import com.polware.sophosmobileapp.viewmodels.SendDocumentViewModel
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -57,8 +58,9 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
     private lateinit var mySharedPreferences: SharedPreferences
     private var activityResultLauncherImageSelected: ActivityResultLauncher<Intent>? = null
     private var activityResultLauncherCameraPhoto: ActivityResultLauncher<Intent>? = null
-    private var encodedImage: String? = null
     private lateinit var viewModel: SendDocumentViewModel
+    private lateinit var repository: SendDocumentRepository
+    private lateinit var factory: SendDocViewModelFactory
 
     private val requestPermissionCamera by lazy {
         permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, 
@@ -67,6 +69,10 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
     private val requestPermissionStorage by lazy {
         permissionsBuilder(Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE).build()
+    }
+
+    companion object {
+        var encodedImageB64: String? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,8 +102,25 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
             customDialogForImage()
         }
 
-        bindingSendDoc.buttonSendDocument.setOnClickListener {
-            validateFormAndSave()
+        repository = SendDocumentRepository()
+        factory = SendDocViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[SendDocumentViewModel::class.java]
+        bindingSendDoc.sendDocument = viewModel
+        bindingSendDoc.lifecycleOwner = this
+
+        viewModel.message.observe(this) { message ->
+            message.getContentIfNotHandled()?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.status.observe(this) { status ->
+            status?.let {
+                // Reset status value first to prevent multi triggering and to be available to trigger action again
+                viewModel.status.value = null
+                Toast.makeText(this, resources.getString(R.string.message_saved_document), Toast.LENGTH_LONG).show()
+                finish()
+            }
         }
 
         bindingSendDoc.toolbarSendDocs.setNavigationOnClickListener {
@@ -222,8 +245,8 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
                     val imageUri = data.data
                     val inputStream = contentResolver.openInputStream(imageUri!!)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
-                    encodedImage = encodeImageToBase64(bitmap)
-                    Log.i("BASE64: ", encodedImage!!)
+                    encodedImageB64 = encodeImageToBase64(bitmap)
+                    Log.i("ImageBase64: ", encodedImageB64!!)
                     bindingSendDoc.imageViewPhoto.setImageBitmap(bitmap)
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -249,57 +272,13 @@ class SendDocumentActivity : AppCompatActivity(), PermissionRequest.Listener {
             val data = result.data
             if (resultCode == RESULT_OK) {
                 val photo: Bitmap = data!!.extras!!.get("data") as Bitmap
+                encodedImageB64 = encodeImageToBase64(photo)
+                Log.i("PhotoBase64: ", encodedImageB64!!)
                 bindingSendDoc.imageViewPhoto.setImageBitmap(photo)
             }
             else {
                 Toast.makeText(this@SendDocumentActivity, "Failed to capture photo",
                     Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun validateFormAndSave(){
-        when {
-            bindingSendDoc.editTextDocNumber.text.isNullOrEmpty() -> {
-                Toast.makeText(this, resources.getString(R.string.submit_form_id_warning), Toast.LENGTH_SHORT).show()
-            }
-            bindingSendDoc.editTextNames.text.isNullOrEmpty() -> {
-                Toast.makeText(this, resources.getString(R.string.submit_form_name_warning), Toast.LENGTH_SHORT).show()
-            }
-            bindingSendDoc.editTextLastName.text.isNullOrEmpty() -> {
-                Toast.makeText(this, resources.getString(R.string.submit_form_lastname_warning), Toast.LENGTH_SHORT).show()
-            }
-            bindingSendDoc.editTextEmailAddress.text.isNullOrEmpty() -> {
-                Toast.makeText(this, resources.getString(R.string.submit_form_email_warning), Toast.LENGTH_SHORT).show()
-            }
-            encodedImage == null -> {
-                Toast.makeText(this, resources.getString(R.string.submit_form_image_warning), Toast.LENGTH_SHORT).show()
-            }
-            else -> {
-                val id = bindingSendDoc.editTextDocNumber.text.toString()
-                val documentType = bindingSendDoc.spinnerDocument.selectedItem.toString()
-                val name = bindingSendDoc.editTextNames.text.toString()
-                val lastName = bindingSendDoc.editTextLastName.text.toString()
-                val city = bindingSendDoc.spinnerCity.selectedItem.toString()
-                val email = bindingSendDoc.editTextEmailAddress.text.toString()
-                val attachedImage = encodedImage
-                val fileType = bindingSendDoc.editTextFileType.text.toString()
-                val newDocument = NewDocument(documentType, id, name, lastName, city,
-                    email, attachedImage!!, fileType)
-                viewModel = ViewModelProvider(this,
-                    SendDocViewModelFactory(newDocument))[SendDocumentViewModel::class.java]
-                viewModel.saveNewDocument()
-                viewModel.status.observe(this) { status ->
-                    status?.let {
-                        // Reset status value first to prevent multi triggering and to be available to trigger action again
-                        viewModel.status.value = null
-                        Toast.makeText(
-                            this@SendDocumentActivity,
-                            resources.getString(R.string.message_saved_document), Toast.LENGTH_LONG
-                        ).show()
-                        finish()
-                    }
-                }
             }
         }
     }

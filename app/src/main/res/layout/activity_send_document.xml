@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="sendDocument"
+            type="com.polware.sophosmobileapp.viewmodels.SendDocumentViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -71,7 +77,8 @@
                 android:theme="@style/Spinner"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewDocument"
                 app:layout_constraintStart_toEndOf="@+id/textViewDocument"
-                app:layout_constraintTop_toTopOf="@+id/textViewDocument" />
+                app:layout_constraintTop_toTopOf="@+id/textViewDocument"
+                tools:setOnItemSelectedListener="@{sendDocument.documentListener}" />
 
             <EditText
                 android:id="@+id/editTextDocNumber"
@@ -82,6 +89,7 @@
                 android:ems="10"
                 android:hint="@string/text_document_number"
                 android:inputType="number"
+                android:text="@={sendDocument.inputId}"
                 android:textColorHint="#757575"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -97,6 +105,7 @@
                 android:hint="@string/text_user_names"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
+                android:text="@={sendDocument.inputName}"
                 android:textColorHint="#757575"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -112,6 +121,7 @@
                 android:hint="@string/text_user_lastname"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
+                android:text="@={sendDocument.inputLastName}"
                 android:textColorHint="#757575"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -127,6 +137,7 @@
                 android:hint="@string/input_email"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
+                android:text="@={sendDocument.inputEmail}"
                 android:textColorHint="#757575"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -142,6 +153,7 @@
                 android:hint="@string/text_file_type"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
+                android:text="@={sendDocument.inputFileType}"
                 android:textColorHint="#757575"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -169,7 +181,8 @@
                 android:theme="@style/Spinner"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewCity"
                 app:layout_constraintStart_toEndOf="@+id/textViewCity"
-                app:layout_constraintTop_toTopOf="@+id/textViewCity" />
+                app:layout_constraintTop_toTopOf="@+id/textViewCity"
+                tools:setOnItemSelectedListener="@{sendDocument.cityListener}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSendDocument"
@@ -177,6 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/send_doc_button_effect"
+                android:onClick="@{()->sendDocument.saveNewDocument()}"
                 android:text="@string/button_send_document"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.databinding.FragmentViewDocumentsBinding
+import com.polware.sophosmobileapp.view.activities.MainActivity
 import com.polware.sophosmobileapp.view.activities.MainActivity.Companion.currentLanguage
 import com.polware.sophosmobileapp.view.activities.SendDocumentActivity
 import com.polware.sophosmobileapp.view.adapters.AdapterViewDocument
@@ -40,8 +41,8 @@ class ViewDocumentsFragment : MainContentFragment() {
         //super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
 
-        (activity as AppCompatActivity?)!!.setSupportActionBar(bindingViewDocuments.toolbarViewDocs)
-        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        (activity as MainActivity).setSupportActionBar(bindingViewDocuments.toolbarViewDocs)
+        val actionBar = (activity as MainActivity).supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar.title = resources.getString(R.string.toolbar_title)
         setupFragmentMenu()

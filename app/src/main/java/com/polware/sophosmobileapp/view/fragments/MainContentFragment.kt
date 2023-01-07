@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import com.polware.sophosmobileapp.R
 import com.polware.sophosmobileapp.data.Constants
 import com.polware.sophosmobileapp.databinding.FragmentMainContentBinding
+import com.polware.sophosmobileapp.view.activities.MainActivity
 import com.polware.sophosmobileapp.view.activities.MainActivity.Companion.currentLanguage
 import com.polware.sophosmobileapp.view.activities.SendDocumentActivity
 import com.polware.sophosmobileapp.view.activities.SignInActivity
@@ -44,8 +45,8 @@ open class MainContentFragment : Fragment() {
         val userName = mySharedPreferences.getString("Username", "").toString()
 
         setCorporateImage()
-        (activity as AppCompatActivity?)!!.setSupportActionBar(bindingMainContent.toolbarMain)
-        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        (activity as MainActivity).setSupportActionBar(bindingMainContent.toolbarMain)
+        val actionBar = (activity as MainActivity).supportActionBar
         actionBar!!.title = userName
         setupOptionsMenu()
 

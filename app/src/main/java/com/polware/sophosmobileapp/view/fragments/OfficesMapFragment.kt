@@ -55,8 +55,8 @@ class OfficesMapFragment : MainContentFragment(), OnMapReadyCallback {
         //super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
 
-        (activity as AppCompatActivity?)!!.setSupportActionBar(bindingOfficesMap.toolbarMap)
-        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        (activity as MainActivity).setSupportActionBar(bindingOfficesMap.toolbarMap)
+        val actionBar = (activity as MainActivity).supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar.title = resources.getString(R.string.toolbar_title)
         setupFragmentMenu()
